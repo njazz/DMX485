@@ -36,6 +36,9 @@
     
     NSTimer *dmx_timer;
     
+    dispatch_source_t timer1;
+    //dispatch_queue_t dmxQueue;
+    
     //
     long mClass;
 
@@ -49,6 +52,11 @@
 -(void) dmx_enable:(bool)yesorno;
 -(void) dmx_set_channel:(unsigned int) channel value:(unsigned char)value;
 
+-(int) getDeviceCount;
+-(void) getDeviceNameForIndex:(long int)index toString:(char*)Buffer;
+
+-(void) connect;
+-(void) disconnect;
 
 
 
