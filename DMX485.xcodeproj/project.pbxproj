@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF122A0EE9AAAD0054F513 /* dmx485.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dmx485.m; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* DMX485.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DMX485.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBBEAE508F335360078DB84 /* dmx485.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dmx485.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		31BFBCA1193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libftd2xx.1.2.2.dylib; path = FTDI/libftd2xx.1.2.2.dylib; sourceTree = "<group>"; };
 		31DDC35F193883D3003910AC /* ftd2xx.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ftd2xx.cfg; path = FTDI/ftd2xx.cfg; sourceTree = "<group>"; };
 		31DDC360193883D3003910AC /* ftd2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftd2xx.h; path = FTDI/ftd2xx.h; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* DMX485.mxo */,
+				2FBBEAE508F335360078DB84 /* dmx485.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,7 +126,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* DMX485.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* dmx485.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +137,7 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DMX485" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -232,7 +232,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = DMX485;
+				PRODUCT_NAME = dmx485;
 				SDKROOT = macosx10.8;
 			};
 			name = Development;
@@ -253,7 +253,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = DMX485;
+				PRODUCT_NAME = dmx485;
 				SDKROOT = macosx10.8;
 			};
 			name = Deployment;
@@ -261,7 +261,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DMX485" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

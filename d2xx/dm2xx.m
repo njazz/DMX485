@@ -26,175 +26,251 @@
 
 #import "dm2xx.h"
 
+
 @implementation dm2xx
 
 @synthesize mClass;
 
+//@synthesize isConnected = isConnected;
+
+#pragma mark -
 #pragma mark i/o
+
+-(id) init
+{
+    NSLog(@"--->    object init");
+    deviceNumber = 0;
+    
+    ftDeviceID = NULL;
+    ftSerialNumber = NULL;
+    ftDeviceDescription = NULL;
+    
+    for (int i=0;i<512;i++) dmx_data[i]=0;
+    
+    dmxPointer = 0;
+    
+#pragma mark connection timer
+    
+    if (!auto_timer)
+    {
+        
+        // connection
+        auto_timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+        dispatch_source_set_timer(auto_timer, DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC, 0.5 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(auto_timer, ^{
+            
+            if (autoConnect) {
+                
+                //[self connect];
+                
+            }
+            
+        });
+        
+        dispatch_resume(auto_timer);
+        dispatch_retain(auto_timer);
+        
+    }
+    
+    return self;
+}
+
+-(void (^)(void))dmx_block
+
+{
+    return Block_copy( ^(void)
+                      {
+                          __block FT_HANDLE qdmxPointer = dmxPointer;
+                          
+                          if ( (qdmxPointer>0) )
+                          {
+                              
+                              {
+                                  
+                                  __block DWORD bytesWrittenOrRead;
+                                  __block unsigned char start;
+                                  
+                                  start = 0;
+                                  
+                                  __block DWORD s1 = 1;
+                                  __block DWORD s2 = 512;
+                                  
+                                  
+                                  __block FT_STATUS qftdiPortStatus;
+                                  __block unsigned char qdmx_data[512], *pqdmx_data;
+                                  for (int i=0;i<512;i++) qdmx_data[i]=dmx_data[i];
+                                  pqdmx_data=qdmx_data;
+                                  
+#pragma mark data timer
+                                  
+                                  qftdiPortStatus = -1;
+                                  
+                                  if (qdmxPointer!=0)
+                                  {
+                                      
+                                      FT_SetBreakOff(qdmxPointer);
+                                      qftdiPortStatus = FT_Write((qdmxPointer), &start, s1, &bytesWrittenOrRead);
+                                      qftdiPortStatus = FT_Write((qdmxPointer), pqdmx_data, s2, &bytesWrittenOrRead);
+                                      FT_SetBreakOn(qdmxPointer);
+                                      qftdiPortStatus = FT_Purge(qdmxPointer, FT_PURGE_RX | FT_PURGE_TX);
+                                      
+                                  }
+                                  
+                                  if (qftdiPortStatus!=FT_OK)
+                                  {
+                                      [self disconnect];
+                                  }
+                              }
+                          }
+                      });
+}
 
 -(void) connect
 {
-//    DWORD numDevs = 0;
-//    // Grab the number of attached devices
-//    
-//    
-//    ftdiPortStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
-//    if (ftdiPortStatus != FT_OK)
-//    {
-//        NSLog(@"dmx485 error: Unable to list devices");
-//        
-//        object_error(self.mClass,"dmx485: unable to list devices");
-//        
-//        return;
-//    }
-//
-    
-    //dmxQueue = dispatch_queue_create("dmxQueue",NULL);
-    //dispatch_queue_set_specific(dmxQueue, DISPATCH_QUEUE_PRIORITY_HIGH, NULL, NULL);
     
     DWORD numDevs = [self getDeviceCount];
-    // Find the device number of the electronics
-    for (long int currentDevice = 0; currentDevice < numDevs; currentDevice++)
+    
+    if ( (numDevs>0)&&(dmxPointer == NULL) )
     {
-        char Buffer[64];
-        [self getDeviceNameForIndex:currentDevice toString:(char *)&Buffer];    //sort of
+        char Buffer[64] = "FT232R USB UART";
+        NSLog(@"dmx485: connecting to device: %i", deviceNumber);
+        
+        
+        //[self getDeviceNameForIndex:deviceNumber toString:(char *)&Buffer];    //sort of
+        //FT_STATUS f1 = FT_ListDevices(deviceNumber,Buffer,FT_LIST_BY_INDEX|FT_OPEN_BY_DESCRIPTION);
         
         NSString *portDescription = [NSString stringWithCString:Buffer encoding:NSASCIIStringEncoding];
         NSLog(@"port name: %@",portDescription);
         
         //object_post(self.mClass, [[NSString stringWithFormat:@"port name: %@",portDescription] charValue]);
         
-        
-        
         if ( ([portDescription isEqualToString:@"FT232R USB UART"]) && (dmxPointer == NULL))
         {
-            // Open the communication with the USB device
             
             object_post(self.mClass, "dmx485: connecting...");
+            NSLog(@"dmx485: connecting...");
             
-            //ftdiPortStatus = FT_OpenEx("FT232R USB UART",FT_OPEN_BY_DESCRIPTION,dmxPointer);
+            FT_HANDLE tdmxPointer=NULL;
             
-            ftdiPortStatus = FT_Open(0,&dmxPointer);
+            ftdiPortStatus = FT_Open(deviceNumber,&tdmxPointer);
+            //NSLog(@"open");
             
             if (ftdiPortStatus != FT_OK)
             {
                 NSLog(@"Electronics error: Can't open USB device: %d", (int)ftdiPortStatus);
-                
-                //object_error(self.mClass, "Electronics error: Can't open USB device");
                 return;
             }
-            //Turn off bit bang mode
-            ftdiPortStatus = FT_SetBitMode(dmxPointer, 0x00,0);
             
+            ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x00,0);
             if (ftdiPortStatus != FT_OK)
             {
                 NSLog(@"Electronics error: Can't set bit bang mode");
+                dmxPointer = 0;
                 return;
             }
-            // Reset the device
-            ftdiPortStatus = FT_ResetDevice(dmxPointer);
-            // Purge transmit and receive buffers
-            ftdiPortStatus = FT_Purge(dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
-            // Set the baud rate
-            ftdiPortStatus = FT_SetBaudRate(dmxPointer, 250000);
+            
+            // reset etc.
+            ftdiPortStatus = FT_ResetDevice(tdmxPointer);
+            ftdiPortStatus = FT_Purge(tdmxPointer, FT_PURGE_RX | FT_PURGE_TX);
+            ftdiPortStatus = FT_SetBaudRate(tdmxPointer, 250000);
+            
             if (ftdiPortStatus != FT_OK)
             {
                 NSLog(@"Electronics error: Can't set baud rate");
-                //object_error(self.mClass, "Electronics error: Can't set baud rate");
+                dmxPointer = 0;
                 return;
             }
             
-            // 1 s timeouts on read / write
-            ftdiPortStatus = FT_SetTimeouts(dmxPointer, 1000, 1000);
-            // Set to communicate at 8N1
-            ftdiPortStatus = FT_SetDataCharacteristics(dmxPointer, FT_BITS_8, FT_STOP_BITS_2, FT_PARITY_NONE); // 8N1
-            // Disable hardware / software flow control
-            ftdiPortStatus = FT_SetFlowControl(dmxPointer, FT_FLOW_NONE, 0, 0);
+            // settings
+            ftdiPortStatus = FT_SetTimeouts(tdmxPointer, 1000, 1000);
+            ftdiPortStatus = FT_SetDataCharacteristics(tdmxPointer, FT_BITS_8, FT_STOP_BITS_2, FT_PARITY_NONE); // 8N1
+            ftdiPortStatus = FT_SetFlowControl(tdmxPointer, FT_FLOW_NONE, 0, 0);
+            FT_ClrRts(tdmxPointer);
             
-            
-            FT_ClrRts(dmxPointer);
-            
-            // Set the latency of the receive buffer way down (2 ms) to facilitate speedy transmission
-            ftdiPortStatus = FT_SetLatencyTimer(dmxPointer,2);
+            ftdiPortStatus = FT_SetLatencyTimer(tdmxPointer,2);
             if (ftdiPortStatus != FT_OK)
             {
                 NSLog(@"Electronics error: Can't set latency timer");
-                //object_error(self.mClass, "Electronics error: Can't set latency timer");
+                dmxPointer = 0;
                 return;
             }
             
-            FT_W32_EscapeCommFunction(dmxPointer,CLRRTS);
+            FT_W32_EscapeCommFunction(tdmxPointer,CLRRTS);
+            
+            FT_GetDeviceInfo(tdmxPointer, &ftDevice, ftDeviceID, ftSerialNumber, ftDeviceDescription, NULL);
             
             object_post(self.mClass, "dmx485: ok");
+            NSLog(@"dmx485: ok");
+            
+            dmxPointer = tdmxPointer;
+            return;
             
             
         }
         else
         {
-            object_error(self.mClass, "dmx485: USB device is not connected");
+            //            object_error(self.mClass, "dmx485: USB device is not connected");
+            //            NSLog(@"dmx485: USB device is not connected");
+            return;
         }
+        
     }
-    
+    else
+    {
+        //object_error(self.mClass, "dmx485: no USB device found");
+        return;
+    }
 }
 
 -(void) disconnect
 {
     
-    
-    ftdiPortStatus = FT_Close(dmxPointer);
-    dmxPointer = 0;
-    if (ftdiPortStatus != FT_OK)
+    if (dmxPointer!=0)
     {
-        NSLog(@"error disconnecting: %li", ftdiPortStatus);
-        object_error(self.mClass, "dmx485: error disconnecting");
-        return;
+        
+        dispatch_queue_t cqueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_group_t cgroup = dispatch_group_create();
+        
+        dispatch_group_async(cgroup,cqueue,^{
+            
+            FT_HANDLE cPointer = dmxPointer;
+            ftdiPortStatus = FT_Close(cPointer);
+            
+        });
+        
+        dispatch_group_notify(cgroup,cqueue,^{
+            
+            dmxPointer = 0;
+            
+            if (ftdiPortStatus != FT_OK)
+            {
+                NSLog(@"error disconnecting: %li", ftdiPortStatus);
+                object_error(self.mClass, "dmx485: error disconnecting");
+                
+                return;
+            }
+            else
+            {
+                object_post(self.mClass, "dmx485: disconnected");
+                NSLog(@"dmx485: disconnected");
+                
+            }
+            
+        });
+        
     }
-    else
-    {
-        object_post(self.mClass, "dmx485: disconnected");
-    }
-    
-    //dispatch_release(dmxQueue);
     
 }
 
--(void) sendData
-{
-    
-    __block DWORD bytesWrittenOrRead;
-    __block unsigned char start;
-    
-    start = 0;
-    
-    FT_SetBreakOff(dmxPointer);
-    
-    runOnMainQueueWithoutDeadlocking(^{
-        
-        
-        DWORD s1 = 1;
-        DWORD s2 = 512;
-        
-        FT_SetBreakOff(dmxPointer);
-        
-        ftdiPortStatus = FT_Write((dmxPointer), &start, s1, &bytesWrittenOrRead);
-        ftdiPortStatus = FT_Write((dmxPointer), &dmx_data, s2, &bytesWrittenOrRead);
-        
-        FT_SetBreakOn(dmxPointer);
-        
-        ftdiPortStatus = FT_Purge(dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
-        
-    });
-    
-}
 
 #pragma mark -
 
 -(int) getDeviceCount
 {
-
+    
     DWORD numDevs=0;
-    ftdiPortStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
-    if (ftdiPortStatus != FT_OK)
+    FT_HANDLE iftdiPortStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
+    if (iftdiPortStatus != FT_OK)
     {
         NSLog(@"dmx485 error: Unable to list devices");
         
@@ -209,49 +285,74 @@
 -(void) getDeviceNameForIndex:(long int)index toString:(char*)Buffer
 {
     
-    ftdiPortStatus = FT_ListDevices((PVOID)index,Buffer,FT_LIST_BY_INDEX|FT_OPEN_BY_DESCRIPTION);
-
+    FT_ListDevices((PVOID)index,&Buffer,FT_LIST_BY_INDEX|FT_OPEN_BY_DESCRIPTION);
+    
 }
 
 
 #pragma mark -
-#pragma mark basic functions
+#pragma mark basic public functions
 
+- (void) dmx_select_device:(unsigned char)index
+{
+    
+    deviceNumber = index;
+    
+}
 -(void) dmx_enable:(bool)yesorno
 {
+    
+    dispatch_suspend(auto_timer);
+    
+    if (dmx_timer)
+    {
+        NSLog(@"timer cancel");
+        dispatch_source_cancel(dmx_timer);
+        dispatch_release(dmx_timer);
+        dmx_timer = nil;
+    }
+    
     if (yesorno)
     {
-        if (!dmx_timer)
+        NSLog(@"starting serial port");
+        
+        
+        
+        if (dmxPointer==0)
         {
-            [self connect];
             
+            dispatch_queue_t cqueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+            dispatch_group_t cgroup = dispatch_group_create();
             
-            timer1 = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
-            dispatch_source_set_timer(timer1, DISPATCH_TIME_NOW, 1/60 * NSEC_PER_SEC, 1/60 * NSEC_PER_SEC);
-            dispatch_source_set_event_handler(timer1, ^{
-                [self sendData];
+            dispatch_group_async(cgroup,cqueue,^{
+                
+                [self connect];
+                
             });
-            dispatch_resume(timer1);
             
-            //NSTimer version
+            dispatch_group_notify(cgroup,cqueue,^{
+                
+                NSLog(@"setting timer");
+                
+                dmx_timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+                dispatch_source_set_timer(dmx_timer, DISPATCH_TIME_NOW, 1/20 * NSEC_PER_SEC, 1/20 * NSEC_PER_SEC);
+                dispatch_source_set_event_handler(dmx_timer, [self dmx_block]);
+                dispatch_resume(dmx_timer);
+                
+                NSLog(@"result %i",(dmxPointer>0));
+                
+            });
             
-            //            dmx_timer = [NSTimer scheduledTimerWithTimeInterval:1/30 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
-            //
-            //            [[NSRunLoop mainRunLoop] addTimer:dmx_timer forMode:NSRunLoopCommonModes];
             
-            NSLog(@"starting serial port");
             
         }
-        
-        
     }
     else
     {
-        dispatch_source_cancel(timer1);
-//        [dmx_timer invalidate];
-//        dmx_timer = nil;
-        [self disconnect];
+        
+        [self disconnect];//[self performSelectorOnMainThread:@selector(disconnect) withObject:nil waitUntilDone:YES];
         NSLog(@"stopped serial port");
+        
     }
 }
 
@@ -262,6 +363,11 @@
     {
         dmx_data[channel] = value;
     }
+}
+
+-(void) dmx_set_auto_connect:(BOOL)yesorno
+{
+    autoConnect = yesorno;
 }
 
 #pragma mark -
@@ -277,6 +383,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
     {
         dispatch_sync(dispatch_get_main_queue(), block);
     }
+}
+
+void runHigh(void (^block)(void))
+{
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, nil), block);
 }
 
 @end

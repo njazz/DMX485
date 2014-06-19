@@ -35,7 +35,11 @@ typedef struct _dmx485
 	t_atom		val;
 	t_symbol	*name;
 	void		*out;
+    void		*out2;
+    
 } t_dmx485;
+
+t_atom out_list[3];
 
 //1
 void *dmx_new(t_symbol *s, long argc, t_atom *argv);
@@ -47,8 +51,13 @@ void dmx_refresh(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 void dmx_print(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
 void dmx_connect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
+void dmx_select_device(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
+void dmx_auto_connect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 void dmx_disconnect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
+
+
+//void dmx_get_info(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
 //handle
 void *dmx485_class;
@@ -58,6 +67,8 @@ void *dmx485_class;
 
 dm2xx *dmx1;
 
+#pragma mark -
+
 int C74_EXPORT main(void)
 {	
 	t_class *c;
@@ -66,13 +77,20 @@ int C74_EXPORT main(void)
 				  0L , A_GIMME, 0);
 	
     
-    class_addmethod(c, (method)dmx_message,				"list",			A_GIMME, 0);
+    class_addmethod(c, (method)dmx_message,				"list",             A_GIMME, 0);
     class_addmethod(c, (method)dmx_refresh,				"refresh",			A_GIMME, 0);
 	
     class_addmethod(c, (method)dmx_print,				"print",			A_GIMME, 0);
 
     class_addmethod(c, (method)dmx_connect,				"connect",			A_GIMME, 0);
+    
+    class_addmethod(c, (method)dmx_select_device,       "device",			A_GIMME, 0);
+    class_addmethod(c, (method)dmx_auto_connect,        "auto_connect",		A_GIMME, 0);
+    
     class_addmethod(c, (method)dmx_disconnect,			"disconnect",		A_GIMME, 0);
+    
+    //class_addmethod(c, (method)dmx_get_info,			"getinfo",		A_GIMME, 0);
+    
 	
     
 	CLASS_METHOD_ATTR_PARSE(c, "identify", "undocumented", gensym("long"), 0, "1");
@@ -91,9 +109,10 @@ int C74_EXPORT main(void)
     
     [dmx1 dmx_enable:YES];
     
-    
     object_post(dmx485_class, "dmx485: loaded");
+    NSLog(@"dmx485 loaded");
     
+    [dmx1 dmx_set_auto_connect:YES];
 
 	return 0;
 }
@@ -102,9 +121,7 @@ int C74_EXPORT main(void)
 
 void dmx_free(t_dmx485 *x)
 {
-	;
-    
-    [dmx1 dmx_enable:NO];
+	[dmx1 dmx_enable:NO];
 }
 
 
@@ -124,8 +141,22 @@ void dmx_refresh(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 
     object_post(dmx485_class, "dmx485: refreshing...");
     
-    [dmx1 dmx_enable:NO];
-    [dmx1 dmx_enable:YES];
+    dispatch_queue_t cqueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t cgroup = dispatch_group_create();
+    
+    dispatch_group_async(cgroup,cqueue,^{
+        
+        [dmx1 dmx_enable:NO];
+        
+    });
+    
+    dispatch_group_notify(cgroup,cqueue,^{
+        
+        [dmx1 dmx_enable:YES];
+    });
+    
+    
+    
 }
 
 
@@ -143,10 +174,12 @@ void *dmx_new(t_symbol *s, long argc, t_atom *argv)
 			x->name = symbol_unique();
 		
 		atom_setlong(&x->val, 0);
+        
 		x->out = outlet_new(x, NULL);
+        x->out2 = listout(x);//(x, NULL);
 	}
     
-    [dmx1 dmx_enable:YES];
+    //[dmx1 dmx_enable:YES];
     
     
     
@@ -158,13 +191,29 @@ void dmx_print(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 
     int n = [dmx1 getDeviceCount];
     
+    outlet_anything(x->out, gensym("clear"), 0, NULL);
+    
     for (int i=0;i<n;i++)
         
     {
         char Buffer[64];
         [dmx1 getDeviceNameForIndex:i toString:Buffer];
         
-        outlet_anything(x->out, gensym(Buffer), 0, NULL);
+//        char c1[128];
+//        strcpy(c1, "insert 0 ");
+//        strcat(c1, Buffer);
+        
+        
+        
+        
+        
+        atom_setsym(out_list, gensym("insert"));
+        atom_setsym(out_list+1, gensym("1"));
+        //atom_setlong(out_list+1, 1);
+        atom_setsym(out_list+2, gensym(Buffer));
+        
+        outlet_list(x->out, NULL, 3, out_list);
+        //outlet_anything(x->out2, gensym(c1), 0, NULL);
     }
     //outlet_anything(x->out, gensym(<#const char *s#>), 0, NULL)
     
@@ -173,13 +222,70 @@ void dmx_print(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 void dmx_connect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 {
     
-    [dmx1 connect];
+    [dmx1 dmx_enable:YES];
 
 }
+
+void dmx_select_device(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
+{
+    
+    long dev = -1;
+    
+    
+    
+    if (argc>0)
+    {
+        dev = atom_getlong(argv);
+    }
+    
+    if ( (dev<0) || (dev>([dmx1 getDeviceCount]-1)) )
+    {
+        NSLog(@"devc %li %i",dev, [dmx1 getDeviceCount]-1);
+        object_error(dmx485_class, "dmx485: wrong device index!");
+    }
+    else
+    {
+        
+        //[dmx1 dmx_enable:NO];
+        
+        
+        [dmx1 dmx_select_device:dev];
+        
+        //[dmx1 dmx_enable:YES];
+        
+        
+        
+        
+        
+    }
+    
+}
+
+void dmx_auto_connect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
+{
+    long con = -1;
+    
+    
+    if (argc>0)
+    {
+        con = atom_getlong(argv);
+    }
+    
+    if (con>=0)
+    {
+        [dmx1 dmx_set_auto_connect:(con>0)];
+        object_post(dmx485_class, (con>0)?"dmx485: auto reconnect enabled":"dmx485: auto reconnect disabled");
+    }
+}
+
+//void dmx_get_info(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
+//{
+//
+//}
 
 void dmx_disconnect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 {
     
-    [dmx1 disconnect];
+    [dmx1 dmx_enable:NO];
     
 }

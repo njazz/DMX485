@@ -26,21 +26,40 @@
 {
     //NSData *command;
 
-    FT_HANDLE dmxPointer;
+    __block FT_HANDLE dmxPointer;
     
     FT_STATUS ftdiPortStatus;
     
     int tempV;
     
-    unsigned char dmx_data[512];
+    __block unsigned char dmx_data[512];
     
-    NSTimer *dmx_timer;
+    //NSTimer *dmx_timer;
     
-    dispatch_source_t timer1;
-    //dispatch_queue_t dmxQueue;
+    dispatch_source_t dmx_timer;
+    dispatch_source_t auto_timer;
+    dispatch_queue_t dmxQueue;
     
     //
     long mClass;
+    
+    unsigned char deviceNumber;
+    
+    // device info
+    FT_DEVICE ftDevice;
+    LPDWORD ftDeviceID;
+    PCHAR ftSerialNumber;
+    PCHAR ftDeviceDescription;
+    
+    
+    
+    
+    
+    BOOL autoConnect;
+    
+//    BOOL dmxEnabled;
+//
+//    __block BOOL isConnected;
 
 }
 
@@ -49,14 +68,24 @@
 
 @property (nonatomic) long mClass;
 
+//@property (atomic) BOOL isConnected;
+
+
 -(void) dmx_enable:(bool)yesorno;
 -(void) dmx_set_channel:(unsigned int) channel value:(unsigned char)value;
+
+-(void) dmx_select_device:(unsigned char)index;
+-(void) dmx_set_auto_connect:(BOOL)value;
 
 -(int) getDeviceCount;
 -(void) getDeviceNameForIndex:(long int)index toString:(char*)Buffer;
 
--(void) connect;
--(void) disconnect;
+//-(void) connect;
+//-(void) disconnect;
+
+
+
+
 
 
 

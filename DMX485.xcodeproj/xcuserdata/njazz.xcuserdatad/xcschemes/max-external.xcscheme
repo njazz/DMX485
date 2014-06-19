@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2FBBEAD608F335360078DB84"
                BuildableName = "DMX485.mxo"
                BlueprintName = "max-external"
-               ReferencedContainer = "container:DMX485.xcodeproj">
+               ReferencedContainer = "container:dmx485.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
