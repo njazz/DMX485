@@ -69,59 +69,6 @@ dm2xx* dmx1;
 
 #pragma mark -
 
-int C74_EXPORT main(void)
-{
-    t_class* c;
-
-    c = class_new("dmx485", (method)dmx_new, (method)dmx_free, (long)sizeof(t_dmx485),
-        0L, A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_message, "list", A_GIMME, 0);
-    class_addmethod(c, (method)dmx_frame, "frame", A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_refresh, "refresh", A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_print, "print", A_GIMME, 0);
-    class_addmethod(c, (method)dmx_version, "version", A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_connect, "connect", A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_select_device, "device", A_GIMME, 0);
-    class_addmethod(c, (method)dmx_auto_connect, "auto_connect", A_GIMME, 0);
-
-    class_addmethod(c, (method)dmx_disconnect, "disconnect", A_GIMME, 0);
-
-    //class_addmethod(c, (method)dmx_get_info,			"getinfo",		A_GIMME, 0);
-
-    CLASS_METHOD_ATTR_PARSE(c, "identify", "undocumented", gensym("long"), 0, "1");
-
-    CLASS_ATTR_SYM(c, "name", 0, t_dmx485, name);
-
-    class_register(CLASS_BOX, c);
-    dmx485_class = c;
-
-    //TODO: c++
-
-    dmx1 = new dm2xx;
-    dmx1->mClass = (t_object*)dmx485_class;
-
-    printf("dmx485 msg");
-
-    dmx1->enable(true);
-
-    object_post((t_object*)dmx485_class, "dmx485: loaded");
-    printf("dmx485 loaded");
-
-    dmx1->set_auto_connect(true);
-
-    return 0;
-}
-
-void dmx_free(t_dmx485* x)
-{
-    dmx1->enable(false);
-}
-
 void dmx_message(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
     dmx1->set_channel(atom_getlong(argv), atom_getlong(argv + 1));
@@ -156,29 +103,6 @@ void dmx_refresh(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
     //    });
 
     dmx1->refresh();
-}
-
-void* dmx_new(t_symbol* s, long argc, t_atom* argv)
-{
-    t_dmx485* x = NULL;
-
-    if ((x = (t_dmx485*)object_alloc((t_class*)dmx485_class))) {
-        x->name = gensym("");
-        if (argc && argv) {
-            x->name = atom_getsym(argv);
-        }
-        if (!x->name || x->name == gensym(""))
-            x->name = symbol_unique();
-
-        atom_setlong(&x->val, 0);
-
-        x->out = outlet_new(x, NULL);
-        x->out2 = listout(x); //(x, NULL);
-    }
-
-    //[dmx1 dmx_enable:YES];
-
-    return (x);
 }
 
 void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
@@ -265,4 +189,85 @@ void dmx_version(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
 
     object_post((t_object*)dmx485_class, dmxVersionString);
+}
+
+#pragma mark main
+
+void* dmx_new(t_symbol* s, long argc, t_atom* argv)
+{
+    t_dmx485* x = NULL;
+
+    if ((x = (t_dmx485*)object_alloc((t_class*)dmx485_class))) {
+        x->name = gensym("");
+        if (argc && argv) {
+            x->name = atom_getsym(argv);
+        }
+        if (!x->name || x->name == gensym(""))
+            x->name = symbol_unique();
+
+        atom_setlong(&x->val, 0);
+
+        x->out = outlet_new(x, NULL);
+        x->out2 = listout(x); //(x, NULL);
+    }
+
+    //[dmx1 dmx_enable:YES];
+
+    return (x);
+}
+
+void dmx_free(t_dmx485* x)
+{
+    dmx1->enable(false);
+}
+
+extern "C" {
+
+int C74_EXPORT main(void)
+{
+    t_class* c;
+
+    c = class_new("dmx485", (method)dmx_new, (method)dmx_free, (long)sizeof(t_dmx485),
+        0L, A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_message, "list", A_GIMME, 0);
+    class_addmethod(c, (method)dmx_frame, "frame", A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_refresh, "refresh", A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_print, "print", A_GIMME, 0);
+    class_addmethod(c, (method)dmx_version, "version", A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_connect, "connect", A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_select_device, "device", A_GIMME, 0);
+    class_addmethod(c, (method)dmx_auto_connect, "auto_connect", A_GIMME, 0);
+
+    class_addmethod(c, (method)dmx_disconnect, "disconnect", A_GIMME, 0);
+
+    //class_addmethod(c, (method)dmx_get_info,			"getinfo",		A_GIMME, 0);
+
+    CLASS_METHOD_ATTR_PARSE(c, "identify", "undocumented", gensym("long"), 0, "1");
+
+    CLASS_ATTR_SYM(c, "name", 0, t_dmx485, name);
+
+    class_register(CLASS_BOX, c);
+    dmx485_class = c;
+
+    //TODO: c++
+
+    dmx1 = new dm2xx;
+    dmx1->mClass = (t_object*)dmx485_class;
+
+    printf("dmx485 msg");
+
+    dmx1->enable(true);
+
+    object_post((t_object*)dmx485_class, "dmx485: loaded");
+    printf("dmx485 loaded");
+
+    dmx1->set_auto_connect(true);
+
+    return 0;
+}
 }

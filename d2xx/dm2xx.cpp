@@ -45,11 +45,12 @@ private:
 
     FT_STATUS ftdiPortStatus;
 
-    int tempV;
+    //int tempV;
 
     __block unsigned char dmx_data[512];
 
-    dispatch_source_t auto_timer;
+    // todo thread
+    //dispatch_source_t auto_timer;
 
     unsigned char deviceNumber;
 
@@ -67,7 +68,7 @@ private:
 
     //NSThread* dThread;
     bool threadOn;
-//int threadAction;
+    int threadAction;
 
 //int getDeviceCount();
 //#pragma mark internal
@@ -284,14 +285,14 @@ public:
 
             if (this->dmxPointer == 0) {
 
-                //threadAction = 1;
+                this->threadAction = 1;
             }
         }
 
         else
 
         {
-            //threadAction = 2;
+            this->threadAction = 2;
 
             printf("stopped serial port");
         }
@@ -301,7 +302,7 @@ public:
     {
         printf("--refresh");
 
-        //threadAction = 3;
+        this->threadAction = 3;
     }
 
     void set_channel(unsigned int channel, unsigned char value)
