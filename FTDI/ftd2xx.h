@@ -66,7 +66,7 @@ typedef struct _EVENT_HANDLE{
 	int iVar;
 } EVENT_HANDLE;
 
-typedef DWORD		 	*FT_HANDLE;
+typedef DWORD		 	FT_HANDLE;
 //typedef unsigned int		 FT_HANDLE;
 //typedef struct ftdi_device *	FT_HANDLE;
 
