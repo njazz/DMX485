@@ -26,78 +26,61 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
 #import "ftd2xx.h"
-
+#import <Foundation/Foundation.h>
 
 #import <Cocoa/Cocoa.h>
 
+#import <dispatch/base.h>
 #import <dispatch/dispatch.h>
 #import <dispatch/queue.h>
-#import <dispatch/base.h>
 
 #include "ext.h"
-
 
 @interface dm2xx : NSObject
 
 {
-    
+
     __block FT_HANDLE dmxPointer;
-    
+
     FT_STATUS ftdiPortStatus;
-    
+
     int tempV;
-    
+
     __block unsigned char dmx_data[512];
-    
+
     dispatch_source_t auto_timer;
-    
+
     //
     long mClass;
-    
+
     unsigned char deviceNumber;
-    
+
     // device info
     FT_DEVICE ftDevice;
     LPDWORD ftDeviceID;
     PCHAR ftSerialNumber;
     PCHAR ftDeviceDescription;
-    
+
     BOOL autoConnect;
-    
-    const void * timerBlock;
-    
-    NSThread *dThread;
+
+    const void* timerBlock;
+
+    NSThread* dThread;
     BOOL threadOn;
     int threadAction;
-    
-    
-
-
 }
-
-
 
 @property (nonatomic) long mClass;
 
--(void) dmx_enable:(bool)yesorno;
--(void) dmx_refresh;
--(void) dmx_set_channel:(unsigned int) channel value:(unsigned char)value;
+- (void)dmx_enable:(bool)yesorno;
+- (void)dmx_refresh;
+- (void)dmx_set_channel:(unsigned int)channel value:(unsigned char)value;
 
--(void) dmx_select_device:(unsigned char)index;
--(void) dmx_set_auto_connect:(BOOL)value;
+- (void)dmx_select_device:(unsigned char)index;
+- (void)dmx_set_auto_connect:(BOOL)value;
 
--(int) getDeviceCount;
--(void) getDeviceNameForIndex:(long int)index toString:(char*)Buffer;
-
-
-
-
-
-
-
-
-
+- (int)getDeviceCount;
+- (void)getDeviceNameForIndex:(long int)index toString:(char*)Buffer;
 
 @end
