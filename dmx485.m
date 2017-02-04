@@ -24,8 +24,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "ext.h"
-#include "ext_obex.h"
+//#include "ext.h"
+//#include "ext_obex.h"
 
 #import "dm2xx.h"
 

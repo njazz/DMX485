@@ -35,7 +35,8 @@
 #import <dispatch/dispatch.h>
 #import <dispatch/queue.h>
 
-#include "ext.h"
+//TODO FIX
+#include "../../MaxSDK-6.1.4/c74support/max-includes/ext.h"
 
 @interface dm2xx : NSObject
 
