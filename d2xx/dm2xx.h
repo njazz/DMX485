@@ -8,6 +8,24 @@
 
 //  Max version
 
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in
+//all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//THE SOFTWARE.
+
 #import <Foundation/Foundation.h>
 #import "ftd2xx.h"
 
@@ -24,8 +42,7 @@
 @interface dm2xx : NSObject
 
 {
-    //NSData *command;
-
+    
     __block FT_HANDLE dmxPointer;
     
     FT_STATUS ftdiPortStatus;
@@ -34,11 +51,7 @@
     
     __block unsigned char dmx_data[512];
     
-    //NSTimer *dmx_timer;
-    
-    dispatch_source_t dmx_timer;
     dispatch_source_t auto_timer;
-    dispatch_queue_t dmxQueue;
     
     //
     long mClass;
@@ -51,27 +64,25 @@
     PCHAR ftSerialNumber;
     PCHAR ftDeviceDescription;
     
-    
-    
-    
-    
     BOOL autoConnect;
     
-//    BOOL dmxEnabled;
-//
-//    __block BOOL isConnected;
+    const void * timerBlock;
+    
+    NSThread *dThread;
+    BOOL threadOn;
+    int threadAction;
+    
+    
+
 
 }
 
-//-(void) connect;
-//-(void) sendData;
+
 
 @property (nonatomic) long mClass;
 
-//@property (atomic) BOOL isConnected;
-
-
 -(void) dmx_enable:(bool)yesorno;
+-(void) dmx_refresh;
 -(void) dmx_set_channel:(unsigned int) channel value:(unsigned char)value;
 
 -(void) dmx_select_device:(unsigned char)index;
@@ -80,8 +91,7 @@
 -(int) getDeviceCount;
 -(void) getDeviceNameForIndex:(long int)index toString:(char*)Buffer;
 
-//-(void) connect;
-//-(void) disconnect;
+
 
 
 

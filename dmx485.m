@@ -5,6 +5,7 @@
 //  Copyright (c) 2014 Alex Nadzharov. All rights reserved.
 //
 //
+
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
 //in the Software without restriction, including without limitation the rights
@@ -23,10 +24,12 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "ext.h"							// standard Max include, always required
-#include "ext_obex.h"						// required for new style Max object
+#include "ext.h"
+#include "ext_obex.h"
 
 #import "dm2xx.h"
+
+#define dmxVersionString "dmx485: version 0.6 beta"
 
 ////////////////////////// object struct
 typedef struct _dmx485
@@ -47,6 +50,8 @@ void dmx_free(t_dmx485 *x);
 
 //2
 void dmx_message(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
+void dmx_frame(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
+
 void dmx_refresh(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 void dmx_print(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
@@ -55,6 +60,7 @@ void dmx_select_device(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 void dmx_auto_connect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 void dmx_disconnect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
+void dmx_version(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
 
 
 //void dmx_get_info(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv);
@@ -78,9 +84,12 @@ int C74_EXPORT main(void)
 	
     
     class_addmethod(c, (method)dmx_message,				"list",             A_GIMME, 0);
+    class_addmethod(c, (method)dmx_frame,				"frame",             A_GIMME, 0);
+    
     class_addmethod(c, (method)dmx_refresh,				"refresh",			A_GIMME, 0);
 	
     class_addmethod(c, (method)dmx_print,				"print",			A_GIMME, 0);
+    class_addmethod(c, (method)dmx_version,				"version",			A_GIMME, 0);
 
     class_addmethod(c, (method)dmx_connect,				"connect",			A_GIMME, 0);
     
@@ -102,10 +111,11 @@ int C74_EXPORT main(void)
     
     //
     
-    dmx1 = [[dm2xx alloc] init];
+    dmx1 = [[[dm2xx alloc] init] retain];
     dmx1.mClass = dmx485_class;
     
     
+    NSLog(@"dmx485 msg");
     
     [dmx1 dmx_enable:YES];
     
@@ -134,6 +144,17 @@ void dmx_message(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
     
 }
 
+void dmx_frame(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
+{
+    
+    for (int i=0;i<argc;i++)
+    {
+        [dmx1 dmx_set_channel:i value:atom_getlong(argv+i)];
+        
+    }
+    
+}
+
 
 
 void dmx_refresh(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
@@ -141,19 +162,21 @@ void dmx_refresh(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 
     object_post(dmx485_class, "dmx485: refreshing...");
     
-    dispatch_queue_t cqueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_group_t cgroup = dispatch_group_create();
+//    dispatch_queue_t cqueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_group_t cgroup = dispatch_group_create();
     
-    dispatch_group_async(cgroup,cqueue,^{
-        
-        [dmx1 dmx_enable:NO];
-        
-    });
+//    dispatch_group_async(cgroup,cqueue,^{
+//        
+//        [dmx1 dmx_enable:NO];
+//        
+//    });
+//    
+//    dispatch_group_notify(cgroup,cqueue,^{
+//        
+//        [dmx1 dmx_enable:YES];
+//    });
     
-    dispatch_group_notify(cgroup,cqueue,^{
-        
-        [dmx1 dmx_enable:YES];
-    });
+    [dmx1 dmx_refresh];
     
     
     
@@ -196,9 +219,13 @@ void dmx_print(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
     for (int i=0;i<n;i++)
         
     {
-        char Buffer[64];
+        //char Buffer[64];
+        
+        char * Buffer = malloc(64);
+        
         [dmx1 getDeviceNameForIndex:i toString:Buffer];
         
+        NSLog(@"dev idx: %i",i);
 //        char c1[128];
 //        strcpy(c1, "insert 0 ");
 //        strcat(c1, Buffer);
@@ -287,5 +314,15 @@ void dmx_disconnect(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
 {
     
     [dmx1 dmx_enable:NO];
+    
+}
+
+void dmx_version(t_dmx485 *x, t_symbol *s, long argc, t_atom *argv)
+{
+    
+    object_post(dmx485_class, dmxVersionString);
+    
+        
+    
     
 }

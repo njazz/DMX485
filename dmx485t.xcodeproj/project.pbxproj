@@ -135,9 +135,9 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485t" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -206,6 +206,8 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Development;
 		};
@@ -226,14 +228,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FTDI",
-					"$(PROJECT_DIR)/FTDI/static32",
-					"$(PROJECT_DIR)/FTDI/i386",
-					"$(PROJECT_DIR)/FTDI/x86_64",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = dmx485;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Development;
 		};
@@ -247,21 +247,19 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FTDI",
-					"$(PROJECT_DIR)/FTDI/static32",
-					"$(PROJECT_DIR)/FTDI/i386",
-					"$(PROJECT_DIR)/FTDI/x86_64",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = dmx485;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Deployment;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485t" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

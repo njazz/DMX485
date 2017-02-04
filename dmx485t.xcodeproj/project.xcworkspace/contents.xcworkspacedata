@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:dmx485.xcodeproj">
+      location = "self:dmx485t.xcodeproj">
    </FileRef>
 </Workspace>
