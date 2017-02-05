@@ -32,22 +32,24 @@
 #import "ftd2xx.h"
 
 //TODO FIX
-#include "../../MaxSDK-6.1.4/c74support/max-includes/ext.h"
+#include "../MaxSDK-6.1.4/c74support/max-includes/ext.h"
 
 //temp while both obj-c & c++
 //typedef int BOOL;
 //typedef DWORD FT_HANDLE typedef unsigned int FT_HANDLE;
 //typedef struct ftdi_device* FT_HANDLE;
 
+#include "pthread.h"
+
 class dm2xx {
 private:
-    __block FT_HANDLE dmxPointer;
+    FT_HANDLE dmxPointer;
 
     FT_STATUS ftdiPortStatus;
 
     //int tempV;
 
-    __block unsigned char dmx_data[512];
+    unsigned char dmx_data[512];
 
     // todo thread
     //dispatch_source_t auto_timer;
@@ -66,12 +68,39 @@ private:
 
     //const void* timerBlock;
 
+    pthread_t dThread;
     //NSThread* dThread;
     bool threadOn;
     int threadAction;
 
-//int getDeviceCount();
-//#pragma mark internal
+    //int getDeviceCount();
+    //#pragma mark internal
+
+    dm2xx()
+    {
+        printf("--->    object init");
+
+        deviceNumber = 0;
+
+        ftDeviceID = NULL;
+        ftSerialNumber = NULL;
+        ftDeviceDescription = NULL;
+
+        for (int i = 0; i < 512; i++)
+            dmx_data[i] = 0;
+
+        dmxPointer = 0;
+
+        printf("--");
+
+        pthread_create(&this->dThread, NULL, &dm2xx::thread, NULL);
+        //todo thread
+        //        dThread = [[NSThread alloc] initWithTarget:self selector:@selector(dmx_thread) object:nil];
+        //        [dThread setThreadPriority:0.85];
+        //        [dThread start];
+    }
+    dm2xx(dm2xx const&){};
+    void operator=(dm2xx const&){};
 
 #pragma mark main actions
 
@@ -215,32 +244,99 @@ private:
         //);
     }
 
+#pragma mark -
+
+    static void* thread(void*)
+    {
+        while (true) {
+
+            dm2xx obj = dm2xx::instance();
+
+            if (obj.threadAction == 1) {
+                obj.threadAction = 0;
+                obj.connect_stage1();
+                obj.connect_stage2();
+            }
+
+            if (obj.threadAction == 2) {
+                obj.threadAction = 0;
+                obj.disconnect();
+            }
+
+            if (obj.threadAction == 3) {
+                obj.threadOn = 0;
+
+                obj.disconnect();
+                obj.threadAction = 0;
+
+                //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                usleep(10000);
+
+                obj.threadAction = 1;
+                //});
+            }
+
+            if (obj.threadOn)
+                obj.timer_action();
+
+            usleep(50000);
+            //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
+        }
+    }
+
+#pragma mark -
+
+    void timer_action()
+    {
+        FT_HANDLE qDmxPointer = this->dmxPointer; //[self get_dmx_pointer];
+
+        if ((qDmxPointer > 0)) {
+
+            {
+
+                DWORD bytesWrittenOrRead;
+                unsigned char start;
+
+                start = 0;
+
+                DWORD s1 = 1;
+
+                //todo packet size
+                DWORD s2 = 512;
+
+                FT_STATUS qftdiPortStatus;
+
+                qftdiPortStatus = -1;
+
+                if (dmxPointer != 0) {
+
+                    FT_SetBreakOff(qDmxPointer);
+                    qftdiPortStatus = FT_Write((qDmxPointer), &start, s1, &bytesWrittenOrRead);
+                    qftdiPortStatus = FT_Write((qDmxPointer), &dmx_data, s2, &bytesWrittenOrRead);
+
+                    FT_SetBreakOn(dmxPointer);
+                    qftdiPortStatus = FT_Purge(qDmxPointer, FT_PURGE_RX | FT_PURGE_TX);
+                }
+
+                if (qftdiPortStatus != FT_OK) {
+                    // todo
+                }
+            }
+        }
+    }
+
 public:
     //
+    static dm2xx& instance()
+    {
+        static dm2xx instance;
+        return instance;
+    }
+
     t_object* mClass;
 
-    dm2xx()
-    {
-        printf("--->    object init");
-
-        deviceNumber = 0;
-
-        ftDeviceID = NULL;
-        ftSerialNumber = NULL;
-        ftDeviceDescription = NULL;
-
-        for (int i = 0; i < 512; i++)
-            dmx_data[i] = 0;
-
-        dmxPointer = 0;
-
-        printf("--");
-
-        //todo thread
-        //        dThread = [[NSThread alloc] initWithTarget:self selector:@selector(dmx_thread) object:nil];
-        //        [dThread setThreadPriority:0.85];
-        //        [dThread start];
-    }
+#pragma mark -
 
 #pragma mark basic public functions
 
@@ -304,6 +400,8 @@ public:
 
         this->threadAction = 3;
     }
+
+#pragma mark setters
 
     void set_channel(unsigned int channel, unsigned char value)
     {

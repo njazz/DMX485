@@ -11,7 +11,7 @@
 		3111EBA019391D67007F1A91 /* ftd2xx.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 31DDC35F193883D3003910AC /* ftd2xx.cfg */; };
 		3111EBA119391D67007F1A91 /* ftd2xx.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DDC360193883D3003910AC /* ftd2xx.h */; };
 		3111EBA219391D67007F1A91 /* WinTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DDC362193883D3003910AC /* WinTypes.h */; };
-		31B3BDE31E4676740083194F /* dm2xx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31B3BDE21E4676740083194F /* dm2xx.cpp */; };
+		312D364E1E47BA6A004ADBD5 /* dm2xx.h in Sources */ = {isa = PBXBuildFile; fileRef = 312D364D1E47BA6A004ADBD5 /* dm2xx.h */; };
 		31BFBCA2193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BFBCA1193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		2FBBEAE508F335360078DB84 /* dmx485.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dmx485.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		310243AA1E46596700D29F5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31B3BDE21E4676740083194F /* dm2xx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dm2xx.cpp; sourceTree = "<group>"; };
+		312D364D1E47BA6A004ADBD5 /* dm2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dm2xx.h; sourceTree = "<group>"; };
 		31BFBCA1193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libftd2xx.1.2.2.dylib; path = FTDI/libftd2xx.1.2.2.dylib; sourceTree = "<group>"; };
 		31DDC35F193883D3003910AC /* ftd2xx.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ftd2xx.cfg; path = FTDI/ftd2xx.cfg; sourceTree = "<group>"; };
 		31DDC360193883D3003910AC /* ftd2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftd2xx.h; path = FTDI/ftd2xx.h; sourceTree = "<group>"; };
@@ -59,6 +59,7 @@
 				310243AA1E46596700D29F5E /* Info.plist */,
 				3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */,
 				22CF122A0EE9AAAD0054F513 /* dmx485.cpp */,
+				312D364D1E47BA6A004ADBD5 /* dm2xx.h */,
 				31DDC36C193885C4003910AC /* d2xx */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 				31DDC358193883AB003910AC /* FTDI */,
@@ -88,7 +89,6 @@
 		31DDC36C193885C4003910AC /* d2xx */ = {
 			isa = PBXGroup;
 			children = (
-				31B3BDE21E4676740083194F /* dm2xx.cpp */,
 				31DDC36D193885C4003910AC /* dm2xx.h */,
 				31DDC36E193885C4003910AC /* dm2xx.m */,
 			);
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CF122B0EE9AAAD0054F513 /* dmx485.cpp in Sources */,
-				31B3BDE31E4676740083194F /* dm2xx.cpp in Sources */,
+				312D364E1E47BA6A004ADBD5 /* dm2xx.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

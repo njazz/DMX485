@@ -27,9 +27,9 @@
 //#include "ext.h"
 //#include "ext_obex.h"
 
-#import "d2xx/dm2xx.cpp"
+#import "dm2xx.h"
 
-#define dmxVersionString "dmx485: version 0.6 beta"
+#define dmxVersionString "dmx485: version 0.7 beta"
 
 ////////////////////////// object struct
 typedef struct _dmx485 {
@@ -208,10 +208,12 @@ void* dmx_new(t_symbol* s, long argc, t_atom* argv)
         atom_setlong(&x->val, 0);
 
         x->out = outlet_new(x, NULL);
-        x->out2 = listout(x); //(x, NULL);
+        x->out2 = listout(x);
     }
 
     //[dmx1 dmx_enable:YES];
+
+    dmx1->enable(true);
 
     return (x);
 }
@@ -256,7 +258,7 @@ int C74_EXPORT main(void)
 
     //TODO: c++
 
-    dmx1 = new dm2xx;
+    dmx1 = &dm2xx::instance();
     dmx1->mClass = (t_object*)dmx485_class;
 
     printf("dmx485 msg");
