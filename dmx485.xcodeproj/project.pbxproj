@@ -37,8 +37,6 @@
 		31DDC35F193883D3003910AC /* ftd2xx.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ftd2xx.cfg; path = FTDI/ftd2xx.cfg; sourceTree = "<group>"; };
 		31DDC360193883D3003910AC /* ftd2xx.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ftd2xx.h; path = FTDI/ftd2xx.h; sourceTree = "<group>"; };
 		31DDC362193883D3003910AC /* WinTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WinTypes.h; path = FTDI/WinTypes.h; sourceTree = "<group>"; };
-		31DDC36D193885C4003910AC /* dm2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dm2xx.h; sourceTree = "<group>"; };
-		31DDC36E193885C4003910AC /* dm2xx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dm2xx.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +58,6 @@
 				3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */,
 				22CF122A0EE9AAAD0054F513 /* dmx485.cpp */,
 				312D364D1E47BA6A004ADBD5 /* dm2xx.h */,
-				31DDC36C193885C4003910AC /* d2xx */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 				31DDC358193883AB003910AC /* FTDI */,
 			);
@@ -84,15 +81,6 @@
 				31BFBCA1193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib */,
 			);
 			name = FTDI;
-			sourceTree = "<group>";
-		};
-		31DDC36C193885C4003910AC /* d2xx */ = {
-			isa = PBXGroup;
-			children = (
-				31DDC36D193885C4003910AC /* dm2xx.h */,
-				31DDC36E193885C4003910AC /* dm2xx.m */,
-			);
-			path = d2xx;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

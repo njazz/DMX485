@@ -140,7 +140,7 @@ void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 void dmx_connect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
 
-    dmx1->enable(true);
+    dmx1->enable();
 }
 
 void dmx_select_device(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
@@ -182,7 +182,7 @@ void dmx_auto_connect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 void dmx_disconnect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
 
-    dmx1->enable(false);
+    dmx1->disable();
 }
 
 void dmx_version(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
@@ -213,14 +213,14 @@ void* dmx_new(t_symbol* s, long argc, t_atom* argv)
 
     //[dmx1 dmx_enable:YES];
 
-    dmx1->enable(true);
+    dmx1->enable();
 
     return (x);
 }
 
 void dmx_free(t_dmx485* x)
 {
-    dmx1->enable(false);
+    dmx1->disable();
 }
 
 extern "C" {
@@ -263,12 +263,12 @@ int C74_EXPORT main(void)
 
     printf("dmx485 msg");
 
-    dmx1->enable(true);
+    //dmx1->enable();
 
     object_post((t_object*)dmx485_class, "dmx485: loaded");
-    printf("dmx485 loaded");
+    //printf("dmx485 loaded");
 
-    dmx1->set_auto_connect(true);
+    //dmx1->set_auto_connect(true);
 
     return 0;
 }
