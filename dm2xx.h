@@ -41,6 +41,10 @@
 
 #include "pthread.h"
 
+class dm2xx;
+
+static dm2xx* dm2xx_obj;
+
 class dm2xx {
 private:
     FT_HANDLE dmxPointer;
@@ -50,9 +54,6 @@ private:
     //int tempV;
 
     unsigned char dmx_data[512];
-
-    // todo thread
-    //dispatch_source_t auto_timer;
 
     unsigned char deviceNumber;
 
@@ -65,11 +66,7 @@ private:
     BOOL autoConnect;
 
     //thread:
-
-    //const void* timerBlock;
-
     pthread_t dThread;
-    //NSThread* dThread;
     bool threadOn;
     int threadAction;
 
@@ -94,6 +91,7 @@ private:
         printf("--");
 
         pthread_create(&this->dThread, NULL, &dm2xx::thread, NULL);
+
         //todo thread
         //        dThread = [[NSThread alloc] initWithTarget:self selector:@selector(dmx_thread) object:nil];
         //        [dThread setThreadPriority:0.85];
@@ -109,13 +107,13 @@ private:
         // connect section 1 - open device
 
         {
-            printf(" *** connect 1");
+            post(" *** connect 1");
 
             DWORD numDevs = this->getDeviceCount();
 
             if ((numDevs > 0) && (dmxPointer == NULL)) {
                 char Buffer[64] = "FT232R USB UART";
-                printf("dmx485: connecting to device: %i", deviceNumber);
+                post("dmx485: connecting to device: %i", deviceNumber);
 
                 //[self getDeviceNameForIndex:deviceNumber toString:(char *)&Buffer];    //sort of
                 //FT_STATUS f1 = FT_ListDevices(deviceNumber,Buffer,FT_LIST_BY_INDEX|FT_OPEN_BY_DESCRIPTION);
@@ -131,7 +129,7 @@ private:
                     FT_HANDLE tdmxPointer = NULL;
                     int idx = deviceNumber;
 
-                    printf("idx p %i %li %li", idx, &tdmxPointer, tdmxPointer);
+                    post("device idx p %i %li %li", idx, &tdmxPointer, tdmxPointer);
 
                     FT_STATUS cftdiPortStatus;
 
@@ -205,16 +203,18 @@ private:
     void connect_stage2()
     {
 
-        if (dmxPointer > 0) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //if (dmxPointer > 0)
+        {
+            //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-                printf("setting timer");
+            usleep(10000);
+            post("setting timer");
 
-                printf("result %li", dmxPointer);
+            post("result %li", dmxPointer);
 
-                //this->threadOn = true;
+            this->threadOn = true;
 
-            });
+            //});
         }
     }
 
@@ -250,48 +250,51 @@ private:
     {
         while (true) {
 
-            dm2xx obj = dm2xx::instance();
+            //dm2xx obj = dm2xx::instance();
 
-            if (obj.threadAction == 1) {
-                obj.threadAction = 0;
-                obj.connect_stage1();
-                obj.connect_stage2();
+            if (dm2xx_obj->threadAction == 1) {
+                post(">connect\n");
+                dm2xx_obj->threadAction = 0;
+                dm2xx_obj->connect_stage1();
+                dm2xx_obj->connect_stage2();
             }
 
-            if (obj.threadAction == 2) {
-                obj.threadAction = 0;
-                obj.disconnect();
+            if (dm2xx_obj->threadAction == 2) {
+                post(">disconnect\n");
+                dm2xx_obj->threadAction = 0;
+                dm2xx_obj->disconnect();
             }
 
-            if (obj.threadAction == 3) {
-                obj.threadOn = 0;
+            if (dm2xx_obj->threadAction == 3) {
+                post(">restart");
+                dm2xx_obj->threadOn = 0;
 
-                obj.disconnect();
-                obj.threadAction = 0;
+                dm2xx_obj->disconnect();
+                dm2xx_obj->threadAction = 0;
 
                 //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
                 usleep(10000);
 
-                obj.threadAction = 1;
+                dm2xx_obj->threadAction = 1;
                 //});
             }
 
-            if (obj.threadOn)
-                obj.timer_action();
+            if (dm2xx_obj->threadOn)
+                dm2xx_obj->timer_action();
 
             usleep(50000);
             //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
         }
     }
 
-#pragma mark -
-
     void timer_action()
     {
         FT_HANDLE qDmxPointer = this->dmxPointer; //[self get_dmx_pointer];
 
-        if ((qDmxPointer > 0)) {
+        //if ((qDmxPointer > 0))
+        post(">timer");
+        {
 
             {
 
@@ -309,7 +312,8 @@ private:
 
                 qftdiPortStatus = -1;
 
-                if (dmxPointer != 0) {
+                //if (dmxPointer != 0)
+                {
 
                     FT_SetBreakOff(qDmxPointer);
                     qftdiPortStatus = FT_Write((qDmxPointer), &start, s1, &bytesWrittenOrRead);
@@ -321,22 +325,26 @@ private:
 
                 if (qftdiPortStatus != FT_OK) {
                     // todo
+                    error(">timer error");
                 }
             }
         }
     }
 
 public:
-    //
+//
+#pragma mark -
+
     static dm2xx& instance()
     {
         static dm2xx instance;
+
+        dm2xx_obj = &instance;
+
         return instance;
     }
 
     t_object* mClass;
-
-#pragma mark -
 
 #pragma mark basic public functions
 
@@ -344,17 +352,19 @@ public:
     {
 
         DWORD numDevs = 0;
-        FT_HANDLE iftdiPortStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
+        FT_STATUS iftdiPortStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
 
         //TODO: move to object
         if (iftdiPortStatus != FT_OK) {
-            printf("dmx485 error: Unable to list devices");
+            //error("dmx485 error: Unable to list devices");
 
             object_error(this->mClass, "dmx485: unable to list devices");
 
             return -1;
-        } else
+        } else {
+            post("devices: %i", numDevs);
             return numDevs;
+        }
     }
 
     void getDeviceNameForIndex(long int index, char* Buffer)
@@ -363,7 +373,7 @@ public:
 
         FT_ListDevices((PVOID)index, Buffer, FT_LIST_BY_INDEX); //|FT_OPEN_BY_DESCRIPTION
 
-        printf("device name: %s", Buffer);
+        post("device name: %s", Buffer);
 
         //Buffer = tempBuffer;
     }
@@ -377,7 +387,7 @@ public:
     {
 
         if (yesorno) {
-            printf("starting serial port");
+            post("starting USB DMX");
 
             if (this->dmxPointer == 0) {
 
@@ -390,13 +400,13 @@ public:
         {
             this->threadAction = 2;
 
-            printf("stopped serial port");
+            post("stopping USB DMX");
         }
     }
 
     void refresh()
     {
-        printf("--refresh");
+        post("--refresh");
 
         this->threadAction = 3;
     }

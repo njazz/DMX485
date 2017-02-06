@@ -121,13 +121,13 @@ void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 
         dmx1->getDeviceNameForIndex(i, Buffer);
 
-        printf("dev idx: %i", i);
+        post("dev idx: %i", i);
         //        char c1[128];
         //        strcpy(c1, "insert 0 ");
         //        strcat(c1, Buffer);
 
         atom_setsym(out_list, gensym("insert"));
-        atom_setsym(out_list + 1, gensym("1"));
+        atom_setlong(out_list + 1, 1);
         //atom_setlong(out_list+1, 1);
         atom_setsym(out_list + 2, gensym(Buffer));
 

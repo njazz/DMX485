@@ -32,10 +32,10 @@
 		2FBBEAE508F335360078DB84 /* dmx485.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dmx485.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		310243AA1E46596700D29F5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		312D364D1E47BA6A004ADBD5 /* dm2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dm2xx.h; sourceTree = "<group>"; };
+		312D364D1E47BA6A004ADBD5 /* dm2xx.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = dm2xx.h; sourceTree = "<group>"; };
 		31BFBCA1193C9FE300E18CA0 /* libftd2xx.1.2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libftd2xx.1.2.2.dylib; path = FTDI/libftd2xx.1.2.2.dylib; sourceTree = "<group>"; };
 		31DDC35F193883D3003910AC /* ftd2xx.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ftd2xx.cfg; path = FTDI/ftd2xx.cfg; sourceTree = "<group>"; };
-		31DDC360193883D3003910AC /* ftd2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftd2xx.h; path = FTDI/ftd2xx.h; sourceTree = "<group>"; };
+		31DDC360193883D3003910AC /* ftd2xx.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ftd2xx.h; path = FTDI/ftd2xx.h; sourceTree = "<group>"; };
 		31DDC362193883D3003910AC /* WinTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WinTypes.h; path = FTDI/WinTypes.h; sourceTree = "<group>"; };
 		31DDC36D193885C4003910AC /* dm2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dm2xx.h; sourceTree = "<group>"; };
 		31DDC36E193885C4003910AC /* dm2xx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dm2xx.m; sourceTree = "<group>"; };
