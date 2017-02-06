@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:dmx485t.xcodeproj">
+      location = "self:/Users/njazz/Documents/github/DMX485_0.62/dmx485.xcodeproj">
    </FileRef>
 </Workspace>
