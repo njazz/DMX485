@@ -126,12 +126,12 @@ void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
         //        strcpy(c1, "insert 0 ");
         //        strcat(c1, Buffer);
 
-        atom_setsym(out_list, gensym("insert"));
-        atom_setlong(out_list + 1, 1);
+        //atom_setsym(out_list, gensym("insert"));
+        atom_setlong(out_list + 0, 1);
         //atom_setlong(out_list+1, 1);
-        atom_setsym(out_list + 2, gensym(Buffer));
+        atom_setsym(out_list + 1, gensym(Buffer));
 
-        outlet_list(x->out, NULL, 3, out_list);
+        outlet_anything(x->out, gensym("insert"), 2, out_list);
         //outlet_anything(x->out2, gensym(c1), 0, NULL);
     }
     //outlet_anything(x->out, gensym(<#const char *s#>), 0, NULL)
@@ -208,7 +208,7 @@ void* dmx_new(t_symbol* s, long argc, t_atom* argv)
         atom_setlong(&x->val, 0);
 
         x->out = outlet_new(x, NULL);
-        x->out2 = listout(x);
+        x->out2 = outlet_new(x, NULL);
     }
 
     //[dmx1 dmx_enable:YES];

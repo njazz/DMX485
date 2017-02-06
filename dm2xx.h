@@ -118,7 +118,7 @@ private:
                     FT_HANDLE tdmxPointer = NULL;
                     int idx = deviceNumber;
 
-                    post("device idx p %i %li %li", idx, &tdmxPointer, tdmxPointer);
+                    //post("device idx p %i %lu %li", idx, &tdmxPointer, tdmxPointer);
 
                     FT_STATUS cftdiPortStatus;
 
@@ -234,17 +234,14 @@ private:
     {
         while (true) {
 
-            //dm2xx obj = dm2xx::instance();
-
             if (dm2xx_obj->threadAction == 1) {
-                //post(">connect\n");
+                post(">connect\n");
                 dm2xx_obj->threadAction = 0;
                 dm2xx_obj->connect();
-                //dm2xx_obj->connect_stage2();
             }
 
             if (dm2xx_obj->threadAction == 2) {
-                //post(">disconnect\n");
+                post(">disconnect\n");
                 dm2xx_obj->threadAction = 0;
                 dm2xx_obj->disconnect();
             }
@@ -267,7 +264,7 @@ private:
             if (dm2xx_obj->threadOn)
                 dm2xx_obj->timer_action();
 
-            usleep(20000);
+            usleep(50000);
             //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
         }
     }
