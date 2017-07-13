@@ -1,2 +1,4 @@
 
 externals
+
+FTDI/libftd2xx.a
