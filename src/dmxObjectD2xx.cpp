@@ -26,9 +26,13 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "dm2xx.h"
+
+
+#include "dmxObject.h"
 
 //static dm2xx* dm2xx_obj;
+
+#include "unistd.h"
 
 dm2xx::dm2xx()
 {

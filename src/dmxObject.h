@@ -26,13 +26,19 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
+
+extern "C" {
+  #import "ftd2xx.h"
+}
+
+#include "compatibility.h"
+
 #include <stdio.h>
 #include <string>
 
-#import "ftd2xx.h"
 
-//TODO FIX
-#include "../MaxSDK-6.1.4/c74support/max-includes/ext.h"
+
+#include "ext.h"
 
 #include "pthread.h"
 

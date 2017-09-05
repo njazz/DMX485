@@ -27,7 +27,8 @@
 //#include "ext.h"
 //#include "ext_obex.h"
 
-#import "dm2xx.h"
+#include "dmxObject.h"
+#include "stdlib.h"
 
 #define dmxVersionString "dmx485: version 0.7 beta"
 
