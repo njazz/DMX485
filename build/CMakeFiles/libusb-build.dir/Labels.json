@@ -1,0 +1,51 @@
+
+{
+	"sources" : 
+	[
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb-build"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb-build.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb-build-complete.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-install.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-mkdir.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-download.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-update.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-patch.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-configure.rule"
+		},
+		
+		{
+			"file" : "/Users/njazz/Documents/github/DMX485_0.62/build/libusb-build-prefix/src/libusb-build-stamp/libusb-build-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : [ "libusb-build" ],
+		"name" : "libusb-build"
+	}
+}

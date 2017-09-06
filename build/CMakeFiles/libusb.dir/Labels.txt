@@ -1,0 +1,13 @@
+# Target labels
+ libusb
+# Source files and their labels
+/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb
+/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb-complete.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-install.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-mkdir.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-download.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-update.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-patch.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-configure.rule
+/Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-build.rule

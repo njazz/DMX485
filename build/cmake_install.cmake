@@ -37,12 +37,12 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
 file(INSTALL DESTINATION "/Users/njazz/Documents/github/DMX485_0.62/bin" TYPE DIRECTORY FILES "/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.mxo" USE_SOURCE_PERMISSIONS)
-  if(EXISTS "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.mxo/Contents/MacOS/dmx485" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.mxo/Contents/MacOS/dmx485")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.mxo/Contents/MacOS/dmx485")
-    endif()
-  endif()
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

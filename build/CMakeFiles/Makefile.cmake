@@ -11,7 +11,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.6.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.6.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.6.1/CMakeSystem.cmake"
+  "libusb-prefix/tmp/libusb-cfgcmd.txt.in"
   "../help/dmx485.maxhelp"
+  "../libftdi/CMakeLists.txt"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
@@ -23,6 +25,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Compiler/AppleClang-CXX.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Compiler/Clang.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Compiler/GNU.cmake"
+  "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/ExternalProject.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/MacOSXBundleInfo.plist.in"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Platform/Darwin-AppleClang-C.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Platform/Darwin-AppleClang-CXX.cmake"
@@ -42,14 +45,18 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "libusb-prefix/tmp/libusb-cfgcmd.txt"
   "../bin/dmx485.maxhelp"
   "dmx485.mxo/Contents/MacOS"
   "dmx485.mxo/Contents/Info.plist"
   "dmx485.mxo/Contents/Info.plist"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "libftdi/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/dmx485.dir/DependInfo.cmake"
+  "CMakeFiles/libusb.dir/DependInfo.cmake"
+  "libftdi/CMakeFiles/libftdi.dir/DependInfo.cmake"
   )

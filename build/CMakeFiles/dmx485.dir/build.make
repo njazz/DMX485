@@ -116,7 +116,8 @@ dmx485_EXTERNAL_OBJECTS =
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/src/dmx485.cpp.o
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/build.make
-dmx485.mxo/Contents/MacOS/dmx485: ../FTDI/libftd2xx.a
+dmx485.mxo/Contents/MacOS/dmx485: ../FTDI/libftd2xx.1.2.2.dylib
+dmx485.mxo/Contents/MacOS/dmx485: lib/libusb-1.0.a
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX CFBundle shared module dmx485.mxo/Contents/MacOS/dmx485"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dmx485.dir/link.txt --verbose=$(VERBOSE)
