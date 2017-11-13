@@ -31,14 +31,10 @@ extern "C" {
   #import "ftd2xx.h"
 }
 
-#include "compatibility.h"
-
 #include <stdio.h>
 #include <string>
 
-
-
-#include "ext.h"
+#include "m_pd.h"
 
 #include "pthread.h"
 

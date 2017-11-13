@@ -71,12 +71,12 @@ void dm2xx::connect()
 
         std::string portDescription = Buffer; //[NSString stringWithCString:Buffer encoding:NSASCIIStringEncoding];
         post("port name: %s", portDescription.c_str());
-        //object_post(this->mClass, [[NSString stringWithFormat:@"port name: %s",portDescription] charValue]);
+        //post(this->mClass, [[NSString stringWithFormat:@"port name: %s",portDescription] charValue]);
 
         //if ((portDescription == "FT232R USB UART") && (dmxPointer == NULL))
         if (dmxPointer == NULL) {
 
-            object_post(this->mClass, "dmx485: connecting...");
+            post( "dmx485: connecting...");
 
             FT_HANDLE tdmxPointer = NULL;
             int idx = deviceNumber;
@@ -129,7 +129,7 @@ void dm2xx::connect()
 
             FT_GetDeviceInfo(tdmxPointer, &ftDevice, ftDeviceID, ftSerialNumber, ftDeviceDescription, NULL);
 
-            object_post(this->mClass, "dmx485: ok");
+            post( "dmx485: ok");
 
             dmxPointer = tdmxPointer;
 
@@ -150,7 +150,7 @@ void dm2xx::connect()
         }
 
     } else {
-        object_error(this->mClass, "dmx485: no USB device found");
+        error( "dmx485: no USB device found");
         //printf("dmx485: no USB device found");
         dmxPointer = 0;
         return;
@@ -181,11 +181,11 @@ void dm2xx::disconnect()
 
         if (ftdiPortStatus != FT_OK) {
             //printf("error disconnecting: %u", ftdiPortStatus);
-            object_error(this->mClass, "dmx485: error disconnecting: %u", ftdiPortStatus);
+            error( "dmx485: error disconnecting: %u", ftdiPortStatus);
 
         } else {
             this->dmxPointer = 0;
-            object_post(this->mClass, "dmx485: disconnected");
+            post( "dmx485: disconnected");
         }
     }
     //);
@@ -302,7 +302,7 @@ int dm2xx::getDeviceCount()
     if (iftdiPortStatus != FT_OK) {
         //error("dmx485 error: Unable to list devices");
 
-        object_error(this->mClass, "dmx485: unable to list devices");
+        error("dmx485: unable to list devices");
 
         return -1;
     } else {

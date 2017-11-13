@@ -4,3 +4,5 @@ externals
 FTDI/libftd2xx.a
 
 dmx485.xcodeproj/project.xcworkspace/xcuserdata/njazz.xcuserdatad/UserInterfaceState.xcuserstate
+
+build/*
