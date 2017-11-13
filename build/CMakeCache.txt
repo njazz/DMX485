@@ -156,7 +156,7 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 dmx485_BINARY_DIR:STATIC=/Users/njazz/Documents/github/DMX485_0.62/build
 
 //Dependencies for the target
-dmx485_LIB_DEPENDS:STATIC=general;/Users/njazz/Documents/github/DMX485_0.62/FTDI/libftd2xx.1.2.2.dylib;general;/Users/njazz/Documents/github/DMX485_0.62/build/lib/libusb-1.0.a;general;-undefined dynamic_lookup;
+dmx485_LIB_DEPENDS:STATIC=general;/Users/njazz/Documents/github/DMX485_0.62/FTDI/libftd2xx.1.2.2.dylib;general;-undefined dynamic_lookup;
 
 //Value Computed by CMake
 dmx485_SOURCE_DIR:STATIC=/Users/njazz/Documents/github/DMX485_0.62
@@ -245,7 +245,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
 //Path to CMake installation.
 CMAKE_ROOT:INTERNAL=/usr/local/Cellar/cmake/3.6.1/share/cmake
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS

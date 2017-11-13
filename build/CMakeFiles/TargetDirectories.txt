@@ -7,11 +7,3 @@
 /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/rebuild_cache.dir
 /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/package_source.dir
 /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/libusb.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/package.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/edit_cache.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/install.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/install/local.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/rebuild_cache.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/package_source.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/list_install_components.dir
-/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/CMakeFiles/libftdi.dir

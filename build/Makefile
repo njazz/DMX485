@@ -191,19 +191,6 @@ libusb/fast:
 	$(MAKE) -f CMakeFiles/libusb.dir/build.make CMakeFiles/libusb.dir/build
 .PHONY : libusb/fast
 
-#=============================================================================
-# Target rules for targets named libftdi
-
-# Build rule for target.
-libftdi: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 libftdi
-.PHONY : libftdi
-
-# fast build rule for target.
-libftdi/fast:
-	$(MAKE) -f libftdi/CMakeFiles/libftdi.dir/build.make libftdi/CMakeFiles/libftdi.dir/build
-.PHONY : libftdi/fast
-
 src/dmx485.o: src/dmx485.cpp.o
 
 .PHONY : src/dmx485.o
@@ -273,7 +260,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... package_source"
 	@echo "... libusb"
-	@echo "... libftdi"
 	@echo "... src/dmx485.o"
 	@echo "... src/dmx485.i"
 	@echo "... src/dmx485.s"

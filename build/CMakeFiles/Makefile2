@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /Users/njazz/Documents/github/DMX485_0.62/build
 # Target rules for target CMakeFiles/dmx485.dir
 
 # All Build rule for target.
-CMakeFiles/dmx485.dir/all: CMakeFiles/libusb.dir/all
+CMakeFiles/dmx485.dir/all:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/depend
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=1,2,3 "Built target dmx485"
@@ -76,7 +76,7 @@ all: CMakeFiles/dmx485.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dmx485.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dmx485.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles 0
 .PHONY : CMakeFiles/dmx485.dir/rule
@@ -103,7 +103,7 @@ clean: CMakeFiles/dmx485.dir/clean
 CMakeFiles/libusb.dir/all:
 	$(MAKE) -f CMakeFiles/libusb.dir/build.make CMakeFiles/libusb.dir/depend
 	$(MAKE) -f CMakeFiles/libusb.dir/build.make CMakeFiles/libusb.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=7,8,9,10,11,12,13,14 "Built target libusb"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=4,5,6,7,8,9,10,11 "Built target libusb"
 .PHONY : CMakeFiles/libusb.dir/all
 
 # Include target in all.
@@ -130,61 +130,6 @@ CMakeFiles/libusb.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/libusb.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory libftdi
-
-# Convenience name for "all" pass in the directory.
-libftdi/all: libftdi/CMakeFiles/libftdi.dir/all
-
-.PHONY : libftdi/all
-
-# Convenience name for "clean" pass in the directory.
-libftdi/clean: libftdi/CMakeFiles/libftdi.dir/clean
-
-.PHONY : libftdi/clean
-
-# Convenience name for "preinstall" pass in the directory.
-libftdi/preinstall:
-
-.PHONY : libftdi/preinstall
-
-#=============================================================================
-# Target rules for target libftdi/CMakeFiles/libftdi.dir
-
-# All Build rule for target.
-libftdi/CMakeFiles/libftdi.dir/all:
-	$(MAKE) -f libftdi/CMakeFiles/libftdi.dir/build.make libftdi/CMakeFiles/libftdi.dir/depend
-	$(MAKE) -f libftdi/CMakeFiles/libftdi.dir/build.make libftdi/CMakeFiles/libftdi.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=4,5,6 "Built target libftdi"
-.PHONY : libftdi/CMakeFiles/libftdi.dir/all
-
-# Include target in all.
-all: libftdi/CMakeFiles/libftdi.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-libftdi/CMakeFiles/libftdi.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 libftdi/CMakeFiles/libftdi.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles 0
-.PHONY : libftdi/CMakeFiles/libftdi.dir/rule
-
-# Convenience name for target.
-libftdi: libftdi/CMakeFiles/libftdi.dir/rule
-
-.PHONY : libftdi
-
-# clean rule for target.
-libftdi/CMakeFiles/libftdi.dir/clean:
-	$(MAKE) -f libftdi/CMakeFiles/libftdi.dir/build.make libftdi/CMakeFiles/libftdi.dir/clean
-.PHONY : libftdi/CMakeFiles/libftdi.dir/clean
-
-# clean rule for target.
-clean: libftdi/CMakeFiles/libftdi.dir/clean
 
 .PHONY : clean
 

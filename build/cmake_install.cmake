@@ -39,12 +39,6 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
 file(INSTALL DESTINATION "/Users/njazz/Documents/github/DMX485_0.62/bin" TYPE DIRECTORY FILES "/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.mxo" USE_SOURCE_PERMISSIONS)
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/Users/njazz/Documents/github/DMX485_0.62/build/libftdi/cmake_install.cmake")
-
-endif()
-
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()

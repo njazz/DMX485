@@ -16,7 +16,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/)
 include_directories(${PROJECT_SOURCE_DIR}/../max-sdk-7.1.0/source/c74support/max-includes)
 include_directories(${PROJECT_SOURCE_DIR}/FTDI/)
 
-add_subdirectory(libftdi)
+#add_subdirectory(libftdi)
 #add_subdirectory(libusb)
 
 include(ExternalProject)
@@ -32,10 +32,10 @@ ExternalProject_Add(libusb
 set (CMAKE_OSX_ARCHITECTURES "x86_64" "i386")
 
 add_library(dmx485 MODULE ${SOURCES})
-add_dependencies(dmx485 libusb)
+#add_dependencies(dmx485 libusb)
 
 target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx.1.2.2.dylib)
-target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/build/lib/libusb-1.0.a)
+#target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/build/lib/libusb-1.0.a)
 
 target_link_libraries(dmx485 ${LIBS} "-undefined dynamic_lookup")
 set_target_properties(dmx485 PROPERTIES PREFIX "")

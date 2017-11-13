@@ -247,6 +247,7 @@ void dm2xx::timer_action()
     DWORD s1 = 1;
 
     //todo packet size
+    DWORD s2_init = 512;
     DWORD s2 = 512;
 
     FT_STATUS qftdiPortStatus;
@@ -257,7 +258,14 @@ void dm2xx::timer_action()
 
         FT_SetBreakOff(this->dmxPointer);
         qftdiPortStatus = FT_Write((this->dmxPointer), &start, s1, &bytesWrittenOrRead);
-        qftdiPortStatus = FT_Write((this->dmxPointer), &dmx_data, s2, &bytesWrittenOrRead);
+        
+        int fuse = 10;
+        while (s2 && fuse)
+        {
+            qftdiPortStatus = FT_Write((this->dmxPointer), &dmx_data+(s2_init-s2), s2, &bytesWrittenOrRead);
+            s2 -= bytesWrittenOrRead;
+            fuse --;
+        }
 
         FT_SetBreakOn(this->dmxPointer);
         qftdiPortStatus = FT_Purge(this->dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
