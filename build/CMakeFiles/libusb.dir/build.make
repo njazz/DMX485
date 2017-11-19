@@ -103,7 +103,7 @@ libusb-prefix/src/libusb-stamp/libusb-configure: libusb-prefix/tmp/libusb-cfgcmd
 libusb-prefix/src/libusb-stamp/libusb-configure: libusb-prefix/src/libusb-stamp/libusb-update
 libusb-prefix/src/libusb-stamp/libusb-configure: libusb-prefix/src/libusb-stamp/libusb-patch
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Performing configure step for 'libusb'"
-	cd /Users/njazz/Documents/github/DMX485_0.62/libusb && cd /Users/njazz/Documents/github/DMX485_0.62/libusb/ && ./configure CC=/usr/bin/gcc "CCFLAGS=\"-arch i386 -arch x86_64\"" "CXXFLAGS=\"-arch i386 -arch x86_64\""
+	cd /Users/njazz/Documents/github/DMX485_0.62/libusb && cd /Users/njazz/Documents/github/DMX485_0.62/libusb/ && ./configure CC=/usr/bin/gcc "CCFLAGS=\"-arch x86_64\"" "CXXFLAGS=\"-arch x86_64\""
 	cd /Users/njazz/Documents/github/DMX485_0.62/libusb && /usr/local/Cellar/cmake/3.6.1/bin/cmake -E touch /Users/njazz/Documents/github/DMX485_0.62/build/libusb-prefix/src/libusb-stamp/libusb-configure
 
 libusb-prefix/src/libusb-stamp/libusb-build: libusb-prefix/src/libusb-stamp/libusb-configure

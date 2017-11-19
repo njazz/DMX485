@@ -60,15 +60,15 @@ include CMakeFiles/dmx485.dir/flags.make
 CMakeFiles/dmx485.dir/src/dmx485.cpp.o: CMakeFiles/dmx485.dir/flags.make
 CMakeFiles/dmx485.dir/src/dmx485.cpp.o: ../src/dmx485.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/dmx485.dir/src/dmx485.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dmx485.dir/src/dmx485.cpp.o -c /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dmx485.dir/src/dmx485.cpp.o -c /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp
 
 CMakeFiles/dmx485.dir/src/dmx485.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dmx485.dir/src/dmx485.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp > CMakeFiles/dmx485.dir/src/dmx485.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp > CMakeFiles/dmx485.dir/src/dmx485.cpp.i
 
 CMakeFiles/dmx485.dir/src/dmx485.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dmx485.dir/src/dmx485.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp -o CMakeFiles/dmx485.dir/src/dmx485.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp -o CMakeFiles/dmx485.dir/src/dmx485.cpp.s
 
 CMakeFiles/dmx485.dir/src/dmx485.cpp.o.requires:
 
@@ -84,15 +84,15 @@ CMakeFiles/dmx485.dir/src/dmx485.cpp.o.provides.build: CMakeFiles/dmx485.dir/src
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: CMakeFiles/dmx485.dir/flags.make
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../src/dmxObjectD2xx.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o -c /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o -c /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp
 
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp > CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp > CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.i
 
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp -o CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp -o CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.s
 
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o.requires:
 
@@ -116,7 +116,7 @@ dmx485_EXTERNAL_OBJECTS =
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/src/dmx485.cpp.o
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/build.make
-dmx485.mxo/Contents/MacOS/dmx485: ../FTDI/libftd2xx.1.2.2.dylib
+dmx485.mxo/Contents/MacOS/dmx485: ../FTDI/libftd2xx.1.4.4.dylib
 dmx485.mxo/Contents/MacOS/dmx485: CMakeFiles/dmx485.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX CFBundle shared module dmx485.mxo/Contents/MacOS/dmx485"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dmx485.dir/link.txt --verbose=$(VERBOSE)

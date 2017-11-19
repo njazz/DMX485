@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		312F19F01FC17CA4003CF4DD /* libftd2xxU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 312F19EF1FC17CA4003CF4DD /* libftd2xxU.a */; };
+		312F19F21FC17D21003CF4DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312F19F11FC17CDA003CF4DD /* Foundation.framework */; };
+		312F19F41FC17D32003CF4DD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312F19F31FC17D2C003CF4DD /* IOKit.framework */; };
 		31C552161F5F4A5F00B18B98 /* dmx485.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C552131F5F4A5F00B18B98 /* dmx485.cpp */; };
 		31C552171F5F4A5F00B18B98 /* dmxObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C552141F5F4A5F00B18B98 /* dmxObject.h */; };
 		31C552181F5F4A5F00B18B98 /* dmxObjectD2xx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C552151F5F4A5F00B18B98 /* dmxObjectD2xx.cpp */; };
 		31C5521D1F5F4ABD00B18B98 /* ftd2xx.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 31C552191F5F4ABD00B18B98 /* ftd2xx.cfg */; };
 		31C5521E1F5F4ABD00B18B98 /* ftd2xx.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C5521A1F5F4ABD00B18B98 /* ftd2xx.h */; };
-		31C5521F1F5F4ABD00B18B98 /* libftd2xx.1.2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C5521B1F5F4ABD00B18B98 /* libftd2xx.1.2.2.dylib */; };
-		31C552201F5F4ABD00B18B98 /* libftd2xx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C5521C1F5F4ABD00B18B98 /* libftd2xx.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,13 +33,14 @@
 		2FBBEAE508F335360078DB84 /* dmx485.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dmx485.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		310243AA1E46596700D29F5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		312F19EF1FC17CA4003CF4DD /* libftd2xxU.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftd2xxU.a; path = ../FTDI/libftd2xxU.a; sourceTree = "<group>"; };
+		312F19F11FC17CDA003CF4DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		312F19F31FC17D2C003CF4DD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		31C552131F5F4A5F00B18B98 /* dmx485.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dmx485.cpp; path = ../src/dmx485.cpp; sourceTree = "<group>"; };
 		31C552141F5F4A5F00B18B98 /* dmxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dmxObject.h; path = ../src/dmxObject.h; sourceTree = "<group>"; };
 		31C552151F5F4A5F00B18B98 /* dmxObjectD2xx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dmxObjectD2xx.cpp; path = ../src/dmxObjectD2xx.cpp; sourceTree = "<group>"; };
 		31C552191F5F4ABD00B18B98 /* ftd2xx.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ftd2xx.cfg; path = ../FTDI/ftd2xx.cfg; sourceTree = "<group>"; };
 		31C5521A1F5F4ABD00B18B98 /* ftd2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftd2xx.h; path = ../FTDI/ftd2xx.h; sourceTree = "<group>"; };
-		31C5521B1F5F4ABD00B18B98 /* libftd2xx.1.2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libftd2xx.1.2.2.dylib; path = ../FTDI/libftd2xx.1.2.2.dylib; sourceTree = "<group>"; };
-		31C5521C1F5F4ABD00B18B98 /* libftd2xx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftd2xx.a; path = ../FTDI/libftd2xx.a; sourceTree = "<group>"; };
 		31C552241F5F4D3C00B18B98 /* compatibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = compatibility.h; path = ../src/compatibility.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,8 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C5521F1F5F4ABD00B18B98 /* libftd2xx.1.2.2.dylib in Frameworks */,
-				31C552201F5F4ABD00B18B98 /* libftd2xx.a in Frameworks */,
+				312F19F41FC17D32003CF4DD /* IOKit.framework in Frameworks */,
+				312F19F21FC17D21003CF4DD /* Foundation.framework in Frameworks */,
+				312F19F01FC17CA4003CF4DD /* libftd2xxU.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,8 @@
 		31C552211F5F4B3A00B18B98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				312F19F31FC17D2C003CF4DD /* IOKit.framework */,
+				312F19F11FC17CDA003CF4DD /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -91,8 +96,7 @@
 			children = (
 				31C552191F5F4ABD00B18B98 /* ftd2xx.cfg */,
 				31C5521A1F5F4ABD00B18B98 /* ftd2xx.h */,
-				31C5521B1F5F4ABD00B18B98 /* libftd2xx.1.2.2.dylib */,
-				31C5521C1F5F4ABD00B18B98 /* libftd2xx.a */,
+				312F19EF1FC17CA4003CF4DD /* libftd2xxU.a */,
 			);
 			name = FTDI;
 			sourceTree = "<group>";
@@ -139,7 +143,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0910;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "dmx485" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -211,8 +215,31 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Development;
@@ -221,7 +248,30 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3101AF611E4656BC0065DD5D /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
 			name = Deployment;
 		};
@@ -231,13 +281,14 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = "../../max-sdk-7.1.0/**";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/../FTDI",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";
@@ -258,6 +309,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/../FTDI",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";

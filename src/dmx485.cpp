@@ -72,7 +72,7 @@ dm2xx* dmx1;
 
 void dmx_message(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-    dmx1->set_channel(atom_getlong(argv), atom_getlong(argv + 1));
+    dmx1->set_channel((unsigned int)atom_getlong(argv), (unsigned int)atom_getlong(argv + 1));
 }
 
 void dmx_frame(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
