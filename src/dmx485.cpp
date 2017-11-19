@@ -30,7 +30,7 @@
 #include "dmxObject.h"
 #include "stdlib.h"
 
-#define dmxVersionString "dmx485: version 0.7 beta"
+#define dmxVersionString "dmx485: version 0.71 beta"
 
 ////////////////////////// object struct
 typedef struct _dmx485 {
@@ -102,7 +102,7 @@ void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
         char* Buffer = (char*)malloc(64);
         dmx1->getDeviceNameForIndex(i, Buffer);
 
-        post("dev idx: %i", i);
+        post("dmx485: device index: %i", i);
 
         atom_setlong(out_list + 0, 1);
         atom_setsym(out_list + 1, gensym(Buffer));
@@ -125,7 +125,7 @@ void dmx_select_device(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
     }
 
     if ((dev < 0) || (dev > (dmx1->getDeviceCount() - 1))) {
-        printf("devc %li %i", dev, dmx1->getDeviceCount() - 1);
+        // printf("devc %li %i", dev, dmx1->getDeviceCount() - 1);
         object_error((t_object*)dmx485_class, "dmx485: wrong device index!");
     } else {
         dmx1->select_device(dev);
@@ -222,7 +222,7 @@ int C74_EXPORT main(void)
     dmx1 = &dm2xx::instance();
     dmx1->mClass = (t_object*)dmx485_class;
 
-    printf("dmx485 msg");
+//    printf("dmx485 msg");
 
     object_post((t_object*)dmx485_class, "dmx485: loaded");
 

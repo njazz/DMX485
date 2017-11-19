@@ -26,10 +26,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-
-
 #include "dmxObject.h"
 
+#define EXTRA_DEBUG false
 //static dm2xx* dm2xx_obj;
 
 #include "unistd.h"
@@ -56,13 +55,16 @@ void dm2xx::connect()
 {
     // connect section 1 - open device
 
+    if (EXTRA_DEBUG)
     post(" *** connect 1");
 
     DWORD numDevs = this->getDeviceCount();
 
     if ((numDevs > 0) && (dmxPointer == NULL)) {
         char Buffer[64] = "FT232R USB UART";
-        post("dmx485: connecting to device: %i", deviceNumber);
+
+        if (EXTRA_DEBUG)
+            post("dmx485: connecting to device: %i", deviceNumber);
 
         //[self getDeviceNameForIndex:deviceNumber toString:(char *)&Buffer];    //sort of
 
@@ -70,7 +72,9 @@ void dm2xx::connect()
         FT_ListDevices(&deviceNumber, Buffer, FT_LIST_BY_INDEX | FT_OPEN_BY_DESCRIPTION);
 
         std::string portDescription = Buffer; //[NSString stringWithCString:Buffer encoding:NSASCIIStringEncoding];
-        post("port name: %s", portDescription.c_str());
+
+        if (EXTRA_DEBUG)
+            post("port name: %s", portDescription.c_str());
         //object_post(this->mClass, [[NSString stringWithFormat:@"port name: %s",portDescription] charValue]);
 
         //if ((portDescription == "FT232R USB UART") && (dmxPointer == NULL))
@@ -89,14 +93,14 @@ void dm2xx::connect()
             post("open");
 
             if (ftdiPortStatus != FT_OK) {
-                error("Electronics error: Can't open USB device: %d", (int)ftdiPortStatus);
+                error("dmx485: electronics error: Can't open USB device: %d", (int)ftdiPortStatus);
                 dmxPointer = 0;
                 return;
             }
 
             ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x00, 0);
             if (ftdiPortStatus != FT_OK) {
-                error("Electronics error: Can't set bit bang mode");
+                error("dmx485: electronics error: Can't set bit bang mode");
                 dmxPointer = 0;
                 return;
             }
@@ -107,7 +111,7 @@ void dm2xx::connect()
             ftdiPortStatus = FT_SetBaudRate(tdmxPointer, 250000);
 
             if (ftdiPortStatus != FT_OK) {
-                error("Electronics error: Can't set baud rate");
+                error("dmx485: electronics error: Can't set baud rate");
                 dmxPointer = 0;
                 return;
             }
@@ -120,7 +124,7 @@ void dm2xx::connect()
 
             ftdiPortStatus = FT_SetLatencyTimer(tdmxPointer, 2);
             if (ftdiPortStatus != FT_OK) {
-                error("Electronics error: Can't set latency timer");
+                error("dmx485: electronics error: Can't set latency timer");
                 dmxPointer = 0;
                 return;
             }
@@ -134,9 +138,11 @@ void dm2xx::connect()
             dmxPointer = tdmxPointer;
 
             usleep(10000);
-            post("setting timer");
 
-            post("result %li", dmxPointer);
+            if (EXTRA_DEBUG)
+                post("setting timer");
+            if (EXTRA_DEBUG)
+                post("result %li", dmxPointer);
 
             this->threadOn = true;
 
@@ -198,13 +204,15 @@ void* dm2xx::thread(void*)
     while (true) {
 
         if (dm2xx_obj->threadAction == 1) {
-            post(">connect\n");
+            if (EXTRA_DEBUG)
+                post(">connect\n");
             dm2xx_obj->threadAction = 0;
             dm2xx_obj->connect();
         }
 
         if (dm2xx_obj->threadAction == 2) {
-            post(">disconnect\n");
+            if (EXTRA_DEBUG)
+                post(">disconnect\n");
             dm2xx_obj->threadAction = 0;
             dm2xx_obj->disconnect();
         }
@@ -258,13 +266,12 @@ void dm2xx::timer_action()
 
         FT_SetBreakOff(this->dmxPointer);
         qftdiPortStatus = FT_Write((this->dmxPointer), &start, s1, &bytesWrittenOrRead);
-        
+
         int fuse = 10;
-        while (s2 && fuse)
-        {
-            qftdiPortStatus = FT_Write((this->dmxPointer), &dmx_data+(s2_init-s2), s2, &bytesWrittenOrRead);
+        while (s2 && fuse) {
+            qftdiPortStatus = FT_Write((this->dmxPointer), &dmx_data + (s2_init - s2), s2, &bytesWrittenOrRead);
             s2 -= bytesWrittenOrRead;
-            fuse --;
+            fuse--;
         }
 
         FT_SetBreakOn(this->dmxPointer);
@@ -273,6 +280,7 @@ void dm2xx::timer_action()
 
     if (qftdiPortStatus != FT_OK) {
         // todo
+        if (EXTRA_DEBUG)
         error(">timer error");
     }
 }
@@ -330,7 +338,7 @@ void dm2xx::select_device(unsigned char index)
 void dm2xx::enable()
 
 {
-    post("starting USB DMX");
+    post("dmx485: starting...");
 
     if (this->dmxPointer == 0) {
 
@@ -343,12 +351,12 @@ void dm2xx::disable()
 {
     this->threadAction = 2;
 
-    post("stopping USB DMX");
+    post("dmx485: stopping...");
 }
 
 void dm2xx::refresh()
 {
-    post("--refresh");
+    post("dmx485: refreshing...");
 
     this->threadAction = 3;
 }
