@@ -1,0 +1,1 @@
+/usr/bin/clang++   -arch x86_64 -bundle -Wl,-headerpad_max_install_names  -o dmx485.mxo/Contents/MacOS/dmx485 CMakeFiles/dmx485.dir/src/dmx485.cpp.o CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o ../FTDI/libftd2xx.1.4.4.dylib -undefined dynamic_lookup 

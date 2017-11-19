@@ -1,0 +1,1 @@
+cmd='cd;/Users/njazz/Documents/github/DMX485_0.62/libusb/;&&;./configure;CC=/usr/bin/gcc;CCFLAGS="-arch x86_64";CXXFLAGS="-arch x86_64"'
