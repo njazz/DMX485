@@ -26,11 +26,12 @@ struct DMXImplementation {
 //    pthread_t dThread;
     bool threadOn;
     int threadAction;
-    std::thread _thread;
 
     //static void* thread(void*);
     void timerAction();
     std::function<void(void)> getThread();
+
+    std::thread* _thread = 0;//(getThread());
 
     unsigned char* _data = 0;
     DMXObjectCore* _object = 0;
@@ -39,14 +40,16 @@ struct DMXImplementation {
     DMXImplementation()
     {
         //pthread_create(&dThread, NULL, getThread(), NULL);
-        _thread = std::thread(getThread());
+       // _thread = std::thread(getThread());
+        _thread = new std::thread(getThread());
     }
 
     ~DMXImplementation()
     {
 //        pthread_join(dThread, NULL);
 //        pthread_exit(NULL);
-        _thread.join();
+        _thread->join();
+        delete _thread;
     }
 };
 
@@ -60,14 +63,14 @@ std::function<void(void)> DMXImplementation::getThread(){ return [&]() {
 
         if (threadAction == 1) {
             if (_object->extraDebug)
-                _object->log.post(">connect\n");
+                _object->log.msg(">connect\n");
             threadAction = 0;
             _object->connect();
         }
 
         if (threadAction == 2) {
             if (_object->extraDebug)
-                _object->log.post(">disconnect\n");
+                _object->log.msg(">disconnect\n");
             threadAction = 0;
             _object->disconnect();
         }
@@ -131,7 +134,7 @@ void DMXImplementation::timerAction()
     if (qftdiPortStatus != FT_OK) {
         // todo
         if (_object->extraDebug)
-            _object->log.error(">timer error");
+            _object->log.errorMsg(">timer error");
     }
 }
 
@@ -159,7 +162,7 @@ void DMXObjectCore::connect()
     // connect section 1 - open device
 
     if (extraDebug)
-        log.post(" *** connect 1");
+        log.msg(" *** connect 1");
 
     DWORD numDevs = (DWORD)deviceCount();
 
@@ -168,7 +171,7 @@ void DMXObjectCore::connect()
         char Buffer[64] = "FT232R USB UART";
 
         if (extraDebug)
-            log.post("dmx485: connecting to device: " + std::to_string(_deviceNumber));
+            log.msg("dmx485: connecting to device: " + std::to_string(_deviceNumber));
 
         std::string portDescription = deviceNameAt(_deviceNumber);
 
@@ -176,11 +179,11 @@ void DMXObjectCore::connect()
         FT_ListDevices(&_deviceNumber, &nBuffer, FT_LIST_BY_INDEX | FT_OPEN_BY_DESCRIPTION);
 
         if (extraDebug)
-            log.post("port name: " + portDescription);
+            log.msg("port name: " + portDescription);
 
         if (_impl->dmxPointer == NULL) {
 
-            log.post("dmx485: connecting...");
+            log.msg("dmx485: connecting...");
 
             FT_HANDLE tdmxPointer = NULL;
             int idx = _deviceNumber;
@@ -188,17 +191,17 @@ void DMXObjectCore::connect()
             FT_STATUS cftdiPortStatus;
 
             cftdiPortStatus = FT_Open(idx, &tdmxPointer);
-            log.post("open");
+            log.msg("open");
 
             if (_impl->ftdiPortStatus != FT_OK) {
-                log.error("dmx485: electronics error: Can't open USB device: " + std::to_string((int)_impl->ftdiPortStatus));
+                log.errorMsg("dmx485: electronics error: Can't open USB device: " + std::to_string((int)_impl->ftdiPortStatus));
                 _impl->dmxPointer = 0;
                 return;
             }
 
             _impl->ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x00, 0);
             if (_impl->ftdiPortStatus != FT_OK) {
-                log.error("dmx485: electronics error: Can't set bit bang mode");
+                log.errorMsg("dmx485: electronics error: Can't set bit bang mode");
                 _impl->dmxPointer = 0;
                 return;
             }
@@ -209,7 +212,7 @@ void DMXObjectCore::connect()
             _impl->ftdiPortStatus = FT_SetBaudRate(tdmxPointer, 250000);
 
             if (_impl->ftdiPortStatus != FT_OK) {
-                log.error("dmx485: electronics error: Can't set baud rate");
+                log.errorMsg("dmx485: electronics error: Can't set baud rate");
                 _impl->dmxPointer = 0;
                 return;
             }
@@ -222,7 +225,7 @@ void DMXObjectCore::connect()
 
             _impl->ftdiPortStatus = FT_SetLatencyTimer(tdmxPointer, 2);
             if (_impl->ftdiPortStatus != FT_OK) {
-                log.error("dmx485: electronics error: Can't set latency timer");
+                log.errorMsg("dmx485: electronics error: Can't set latency timer");
                 _impl->dmxPointer = 0;
                 return;
             }
@@ -231,29 +234,29 @@ void DMXObjectCore::connect()
 
             FT_GetDeviceInfo(tdmxPointer, &_impl->ftDevice, _impl->ftDeviceID, _impl->ftSerialNumber, _impl->ftDeviceDescription, NULL);
 
-            log.post("dmx485: ok"); //object_ this->mClass,
+            log.msg("dmx485: ok"); //object_ this->mClass,
 
             _impl->dmxPointer = tdmxPointer;
 
             usleep(10000);
 
             if (extraDebug)
-                log.post("setting timer");
+                log.msg("setting timer");
             if (extraDebug)
-                log.post("result " + std::to_string((long)_impl->dmxPointer));
+                log.msg("result " + std::to_string((long)_impl->dmxPointer));
 
             _impl->threadOn = true;
 
             return;
 
         } else {
-            log.post("dmx485: USB device is not connected");
+            log.msg("dmx485: USB device is not connected");
             _impl->dmxPointer = 0;
             return;
         }
 
     } else {
-        log.error("dmx485: no USB device found");
+        log.errorMsg("dmx485: no USB device found");
         _impl->dmxPointer = 0;
         return;
     }
@@ -273,11 +276,11 @@ void DMXObjectCore::disconnect()
         }
 
         if (_impl->ftdiPortStatus != FT_OK) {
-            log.error("dmx485: error disconnecting: " + std::to_string(_impl->ftdiPortStatus));
+            log.errorMsg("dmx485: error disconnecting: " + std::to_string(_impl->ftdiPortStatus));
 
         } else {
             _impl->dmxPointer = 0;
-            log.post("dmx485: disconnected");
+            log.msg("dmx485: disconnected");
         }
     }
 }
@@ -291,10 +294,10 @@ size_t DMXObjectCore::deviceCount()
 
     //TODO: move to object
     if (iftdiPortStatus != FT_OK) {
-        log.error("dmx485: unable to list devices");
+        log.errorMsg("dmx485: unable to list devices");
         return -1;
     } else {
-        log.post("devices: " + std::to_string(numDevs));
+        log.msg("devices: " + std::to_string(numDevs));
         return numDevs;
     }
 }
@@ -305,7 +308,7 @@ std::string DMXObjectCore::deviceNameAt(size_t idx)
     FT_ListDevices((PVOID)index, buffer, FT_LIST_BY_INDEX); //|FT_OPEN_BY_DESCRIPTION\
 
     std::string ret = std::string(buffer);
-    log.post("device name: " + ret);
+    log.msg("device name: " + ret);
 
     return ret;
 }
@@ -323,16 +326,16 @@ void DMXObjectCore::setEnabled(bool value)
         if (_impl->dmxPointer == 0) {
             _impl->threadAction = 1;
         }
-        log.post("dmx485: starting...");
+        log.msg("dmx485: starting...");
     } else {
-        log.post("dmx485: stopping...");
+        log.msg("dmx485: stopping...");
         _impl->threadAction = 2;
     }
 }
 
 void DMXObjectCore::refresh()
 {
-    log.post("dmx485: refreshing...");
+    log.msg("dmx485: refreshing...");
     _impl->threadAction = 3;
 }
 

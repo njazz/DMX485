@@ -5,7 +5,8 @@ project (dmx485)
 
 set (SOURCES
         src/dmx485.cpp
-        src/dmxObjectD2xx.cpp
+#        src/dmxObjectD2xx.cpp
+        src/DMXObjectCore.cpp
 )
 
 include_directories(.)
@@ -17,6 +18,8 @@ include_directories(${PROJECT_SOURCE_DIR}/FTDI/)
 set (CMAKE_OSX_ARCHITECTURES "x86_64" "i386")
 
 add_library(dmx485 MODULE ${SOURCES})
+set_property(TARGET dmx485 PROPERTY CXX_STANDARD 11)
+
 target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx.1.2.2.dylib)
 
 target_link_libraries(dmx485 ${LIBS} "-undefined dynamic_lookup")
@@ -36,7 +39,7 @@ project (dmx485pd)
 
 set (SOURCES_PD
         src/dmx485_pd.cpp
-        src/dmxObjectD2xx.cpp
+#        src/dmxObjectD2xx.cpp
 
         src/DMXObjectCore.cpp
 )
@@ -62,6 +65,7 @@ include_directories(${PROJECT_SOURCE_DIR}/../max-sdk-7.1.0/source/c74support/max
 include_directories(${PROJECT_SOURCE_DIR}/FTDI/)
 
 add_library(dmx485pd MODULE ${SOURCES_PD} )
+set_property(TARGET dmx485pd PROPERTY CXX_STANDARD 11)
 
 target_link_libraries(dmx485pd ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx.1.2.2.dylib)
 #target_link_libraries(dmx485pd ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx64.a)

@@ -1,10 +1,9 @@
 #include <string>
 
-class DMXLog
-{
+class DMXLog {
 public:
-  void registerObserver();
+    void registerObserver(){};
 
-    void post(std::string v);
-    void error(std::string v);
+    void msg(std::string v) { printf("%s", v.c_str()); };
+    void errorMsg(std::string v){ printf("ERROR: %s", v.c_str()); };
 };

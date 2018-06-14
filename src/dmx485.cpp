@@ -24,13 +24,17 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-//#include "ext.h"
-//#include "ext_obex.h"
+#include "compatibility.h"
 
-#include "dmxObject.h"
+#include <stdio.h>
+#include "ext.h"
+#include "ext_obex.h"
+
 #include "stdlib.h"
 
 #include "versionString.h"
+
+#include "DMXObjectCore.h"
 
 // =======
 // object struct
@@ -68,45 +72,43 @@ void dmx_version(t_dmx485* x, t_symbol* s, long argc, t_atom* argv);
 void* dmx485_class;
 
 //
-dm2xx* dmx1;
+DMXObjectCore* dmxObject;
 
 #pragma mark -
 
 void dmx_message(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-    dmx1->set_channel((unsigned int)atom_getlong(argv), (unsigned int)atom_getlong(argv + 1));
+    dmxObject->setChannel((unsigned int)atom_getlong(argv), (unsigned int)atom_getlong(argv + 1));
 }
 
 void dmx_frame(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
     for (int i = 0; i < argc; i++) {
-        dmx1->set_channel(i, atom_getlong(argv + i));
+        dmxObject->setChannel(i, atom_getlong(argv + i));
     }
 }
 
 void dmx_refresh(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
     object_post((t_object*)dmx485_class, "dmx485: refreshing...");
-    dmx1->refresh();
+    dmxObject->refresh();
 }
 
 void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-
-    int n = dmx1->getDeviceCount();
+    int n = dmxObject->deviceCount();
 
     outlet_anything(x->out, gensym("clear"), 0, NULL);
 
     for (int i = 0; i < n; i++)
 
     {
-        char* Buffer = (char*)malloc(64);
-        dmx1->getDeviceNameForIndex(i, Buffer);
+        auto  str = dmxObject->deviceNameAt(i);
 
         post("dmx485: device index: %i", i);
 
         atom_setlong(out_list + 0, 1);
-        atom_setsym(out_list + 1, gensym(Buffer));
+        atom_setsym(out_list + 1, gensym(str.c_str()));
 
         outlet_anything(x->out, gensym("insert"), 2, out_list);
     }
@@ -114,7 +116,7 @@ void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 
 void dmx_connect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-    dmx1->enable();
+    dmxObject->setEnabled(true);
 }
 
 void dmx_select_device(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
@@ -125,11 +127,11 @@ void dmx_select_device(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
         dev = atom_getlong(argv);
     }
 
-    if ((dev < 0) || (dev > (dmx1->getDeviceCount() - 1))) {
+    if ((dev < 0) || (dev > (dmxObject->deviceCount() - 1))) {
         // printf("devc %li %i", dev, dmx1->getDeviceCount() - 1);
         object_error((t_object*)dmx485_class, "dmx485: wrong device index!");
     } else {
-        dmx1->select_device(dev);
+        dmxObject->setDeviceNumber(dev);
     }
 }
 
@@ -142,14 +144,14 @@ void dmx_auto_connect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
     }
 
     if (con >= 0) {
-        dmx1->set_auto_connect(con > 0);
+        dmxObject->setAutoConnect(con > 0);
         object_post((t_object*)dmx485_class, (con > 0) ? "dmx485: auto reconnect enabled" : "dmx485: auto reconnect disabled");
     }
 }
 
 void dmx_disconnect(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-    dmx1->disable();
+    dmxObject->setEnabled(false);
 }
 
 void dmx_version(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
@@ -177,14 +179,14 @@ void* dmx_new(t_symbol* s, long argc, t_atom* argv)
         x->out2 = outlet_new(x, NULL);
     }
 
-    dmx1->enable();
+    dmxObject->setEnabled(true);
 
     return (x);
 }
 
 void dmx_free(t_dmx485* x)
 {
-    dmx1->disable();
+    dmxObject->setEnabled(false);
 }
 
 extern "C" {
@@ -220,14 +222,10 @@ int C74_EXPORT main(void)
     class_register(CLASS_BOX, c);
     dmx485_class = c;
 
-    dmx1 = &dm2xx::instance();
-    dmx1->mClass = (t_object*)dmx485_class;
-
-//    printf("dmx485 msg");
+    dmxObject = new DMXObjectCore(); //&dm2xx::instance();
+    //dmx1->mClass = (t_object*)dmx485_class;
 
     object_post((t_object*)dmx485_class, "dmx485: loaded");
-
-    //dmx1->set_auto_connect(true);
 
     return 0;
 }
