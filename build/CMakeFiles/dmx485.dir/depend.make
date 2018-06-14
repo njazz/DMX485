@@ -76,4 +76,5 @@ CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../FTDI/ftd2xx.h
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../src/compatibility.h
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../src/dmxObject.h
 CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../src/dmxObjectD2xx.cpp
+CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o: ../src/dmxObject_pd.h
 

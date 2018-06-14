@@ -194,8 +194,8 @@ CSCOPE = cscope
 DIST_SUBDIRS = libusb doc examples tests
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/libusb-1.0.pc.in AUTHORS COPYING ChangeLog INSTALL \
-	NEWS README TODO compile config.guess config.sub install-sh \
-	ltmain.sh missing
+	NEWS README TODO compile config.guess config.sub depcomp \
+	install-sh ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -255,7 +255,7 @@ CPPFLAGS =
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = "-arch x86_64"
+CXXFLAGS = "-arch i386 -arch x86_64"
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps

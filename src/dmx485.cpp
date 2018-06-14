@@ -30,9 +30,11 @@
 #include "dmxObject.h"
 #include "stdlib.h"
 
-#define dmxVersionString "dmx485: version 0.71 beta"
+#include "versionString.h"
 
-////////////////////////// object struct
+// =======
+// object struct
+
 typedef struct _dmx485 {
     t_object ob;
     t_atom val;
@@ -84,7 +86,6 @@ void dmx_frame(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 
 void dmx_refresh(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-
     object_post((t_object*)dmx485_class, "dmx485: refreshing...");
     dmx1->refresh();
 }

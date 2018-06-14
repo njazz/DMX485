@@ -1,5 +1,5 @@
 //
-//  dm2xx.h
+//  dmxObject.h
 //
 //
 //  Created by Alex Nadzharov on 04/02/17.
@@ -26,17 +26,14 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-
 extern "C" {
-  #import "ftd2xx.h"
+#import "ftd2xx.h"
 }
 
 #include "compatibility.h"
 
 #include <stdio.h>
 #include <string>
-
-
 
 #include "ext.h"
 
@@ -49,20 +46,17 @@ static dm2xx* dm2xx_obj;
 class dm2xx {
 private:
     FT_HANDLE dmxPointer;
-
     FT_STATUS ftdiPortStatus;
-
-    //int tempV;
-
-    unsigned char dmx_data[512];
-
-    unsigned char deviceNumber;
 
     // device info
     FT_DEVICE ftDevice;
     LPDWORD ftDeviceID;
     PCHAR ftSerialNumber;
     PCHAR ftDeviceDescription;
+
+    //
+    unsigned char dmx_data[512];
+    unsigned char deviceNumber;
 
     BOOL autoConnect;
 
@@ -81,7 +75,6 @@ private:
     void disconnect();
 
     // thread
-
     static void* thread(void*);
     void timer_action();
 
@@ -99,8 +92,8 @@ public:
     void select_device(unsigned char index);
 
     void enable();
-
     void disable();
+    
     void refresh();
 
     // setters

@@ -207,6 +207,20 @@ pthread.h
 /Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp
 dmxObject.h
 /Users/njazz/Documents/github/DMX485_0.62/src/dmxObject.h
+dmxObject_pd.h
+/Users/njazz/Documents/github/DMX485_0.62/src/dmxObject_pd.h
 unistd.h
 /Users/njazz/Documents/github/DMX485_0.62/src/unistd.h
+
+/Users/njazz/Documents/github/DMX485_0.62/src/dmxObject_pd.h
+ftd2xx.h
+/Users/njazz/Documents/github/DMX485_0.62/src/ftd2xx.h
+stdio.h
+-
+string
+-
+m_pd.h
+/Users/njazz/Documents/github/DMX485_0.62/src/m_pd.h
+pthread.h
+/Users/njazz/Documents/github/DMX485_0.62/src/pthread.h
 

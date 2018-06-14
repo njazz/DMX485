@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="dmx485pd"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\help\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 package"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package_source">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 package_source"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dmx485">
+				<Option output="/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.mxo/Contents/MacOS/dmx485" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DPD_BUILD"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/."/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/./src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/../max-sdk-7.1.0/source/c74support/max-includes"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/FTDI"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 dmx485"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dmx485/fast">
+				<Option output="/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.mxo/Contents/MacOS/dmx485" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DPD_BUILD"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/."/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/./src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/../max-sdk-7.1.0/source/c74support/max-includes"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/FTDI"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 dmx485/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dmx485pd">
+				<Option output="/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.pd_darwin" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DPD_BUILD"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/."/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/./src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/../max-sdk-7.1.0/source/c74support/max-includes"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/FTDI"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 dmx485pd"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dmx485pd/fast">
+				<Option output="/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.pd_darwin" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/njazz/Documents/github/DMX485_0.62/build"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DPD_BUILD"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/."/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/./src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/src"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/../max-sdk-7.1.0/source/c74support/max-includes"/>
+					<Add directory="/Users/njazz/Documents/github/DMX485_0.62/FTDI"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 dmx485pd/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/njazz/Documents/github/DMX485_0.62/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/src/DMXObjectCore.cpp">
+			<Option target="dmx485pd"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/src/DMXObjectCore.h">
+			<Option target="dmx485pd"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/src/dmx485.cpp">
+			<Option target="dmx485"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/src/dmx485_pd.cpp">
+			<Option target="dmx485pd"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/src/dmxObjectD2xx.cpp">
+			<Option target="dmx485"/>
+			<Option target="dmx485pd"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/help/dmx485.maxhelp">
+			<Option virtualFolder="CMake Files\help\"/>
+		</Unit>
+		<Unit filename="/Users/njazz/Documents/github/DMX485_0.62/help/dmx485--help.pd">
+			<Option virtualFolder="CMake Files\help\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

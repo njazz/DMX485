@@ -26,7 +26,11 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
+#ifndef PD_BUILD
 #include "dmxObject.h"
+#else
+#include "dmxObject_pd.h"
+#endif
 
 #define EXTRA_DEBUG false
 //static dm2xx* dm2xx_obj;
@@ -56,7 +60,7 @@ void dm2xx::connect()
     // connect section 1 - open device
 
     if (EXTRA_DEBUG)
-    post(" *** connect 1");
+        post(" *** connect 1");
 
     DWORD numDevs = this->getDeviceCount();
 
@@ -80,7 +84,8 @@ void dm2xx::connect()
         //if ((portDescription == "FT232R USB UART") && (dmxPointer == NULL))
         if (dmxPointer == NULL) {
 
-            object_post(this->mClass, "dmx485: connecting...");
+            //object_
+            post("dmx485: connecting..."); //this->mClass,
 
             FT_HANDLE tdmxPointer = NULL;
             int idx = deviceNumber;
@@ -133,7 +138,7 @@ void dm2xx::connect()
 
             FT_GetDeviceInfo(tdmxPointer, &ftDevice, ftDeviceID, ftSerialNumber, ftDeviceDescription, NULL);
 
-            object_post(this->mClass, "dmx485: ok");
+            post("dmx485: ok"); //object_ this->mClass,
 
             dmxPointer = tdmxPointer;
 
@@ -156,7 +161,8 @@ void dm2xx::connect()
         }
 
     } else {
-        object_error(this->mClass, "dmx485: no USB device found");
+        //object_error(this->mClass, "dmx485: no USB device found");
+        error("dmx485: no USB device found");
         //printf("dmx485: no USB device found");
         dmxPointer = 0;
         return;
@@ -187,11 +193,13 @@ void dm2xx::disconnect()
 
         if (ftdiPortStatus != FT_OK) {
             //printf("error disconnecting: %u", ftdiPortStatus);
-            object_error(this->mClass, "dmx485: error disconnecting: %u", ftdiPortStatus);
+            //object_error(this->mClass, "dmx485: error disconnecting: %u", ftdiPortStatus);
+            error("dmx485: error disconnecting: %u", ftdiPortStatus);
 
         } else {
             this->dmxPointer = 0;
-            object_post(this->mClass, "dmx485: disconnected");
+            //object_post(this->mClass, "dmx485: disconnected");
+            post("dmx485: disconnected");
         }
     }
     //);
@@ -281,7 +289,7 @@ void dm2xx::timer_action()
     if (qftdiPortStatus != FT_OK) {
         // todo
         if (EXTRA_DEBUG)
-        error(">timer error");
+            error(">timer error");
     }
 }
 
@@ -310,7 +318,7 @@ int dm2xx::getDeviceCount()
     if (iftdiPortStatus != FT_OK) {
         //error("dmx485 error: Unable to list devices");
 
-        object_error(this->mClass, "dmx485: unable to list devices");
+        error("dmx485: unable to list devices"); //object_ this->mClass,
 
         return -1;
     } else {

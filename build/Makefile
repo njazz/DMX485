@@ -77,17 +77,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.6.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -144,6 +133,17 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/Cellar/cmake/3.6.1/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles /Users/njazz/Documents/github/DMX485_0.62/build/CMakeFiles/progress.marks
@@ -189,6 +189,46 @@ dmx485/fast:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/build
 .PHONY : dmx485/fast
 
+#=============================================================================
+# Target rules for targets named dmx485pd
+
+# Build rule for target.
+dmx485pd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 dmx485pd
+.PHONY : dmx485pd
+
+# fast build rule for target.
+dmx485pd/fast:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/build
+.PHONY : dmx485pd/fast
+
+src/DMXObjectCore.o: src/DMXObjectCore.cpp.o
+
+.PHONY : src/DMXObjectCore.o
+
+# target to build an object file
+src/DMXObjectCore.cpp.o:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/DMXObjectCore.cpp.o
+.PHONY : src/DMXObjectCore.cpp.o
+
+src/DMXObjectCore.i: src/DMXObjectCore.cpp.i
+
+.PHONY : src/DMXObjectCore.i
+
+# target to preprocess a source file
+src/DMXObjectCore.cpp.i:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/DMXObjectCore.cpp.i
+.PHONY : src/DMXObjectCore.cpp.i
+
+src/DMXObjectCore.s: src/DMXObjectCore.cpp.s
+
+.PHONY : src/DMXObjectCore.s
+
+# target to generate assembly for a file
+src/DMXObjectCore.cpp.s:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/DMXObjectCore.cpp.s
+.PHONY : src/DMXObjectCore.cpp.s
+
 src/dmx485.o: src/dmx485.cpp.o
 
 .PHONY : src/dmx485.o
@@ -216,6 +256,33 @@ src/dmx485.cpp.s:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/src/dmx485.cpp.s
 .PHONY : src/dmx485.cpp.s
 
+src/dmx485_pd.o: src/dmx485_pd.cpp.o
+
+.PHONY : src/dmx485_pd.o
+
+# target to build an object file
+src/dmx485_pd.cpp.o:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmx485_pd.cpp.o
+.PHONY : src/dmx485_pd.cpp.o
+
+src/dmx485_pd.i: src/dmx485_pd.cpp.i
+
+.PHONY : src/dmx485_pd.i
+
+# target to preprocess a source file
+src/dmx485_pd.cpp.i:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmx485_pd.cpp.i
+.PHONY : src/dmx485_pd.cpp.i
+
+src/dmx485_pd.s: src/dmx485_pd.cpp.s
+
+.PHONY : src/dmx485_pd.s
+
+# target to generate assembly for a file
+src/dmx485_pd.cpp.s:
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmx485_pd.cpp.s
+.PHONY : src/dmx485_pd.cpp.s
+
 src/dmxObjectD2xx.o: src/dmxObjectD2xx.cpp.o
 
 .PHONY : src/dmxObjectD2xx.o
@@ -223,6 +290,7 @@ src/dmxObjectD2xx.o: src/dmxObjectD2xx.cpp.o
 # target to build an object file
 src/dmxObjectD2xx.cpp.o:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.o
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmxObjectD2xx.cpp.o
 .PHONY : src/dmxObjectD2xx.cpp.o
 
 src/dmxObjectD2xx.i: src/dmxObjectD2xx.cpp.i
@@ -232,6 +300,7 @@ src/dmxObjectD2xx.i: src/dmxObjectD2xx.cpp.i
 # target to preprocess a source file
 src/dmxObjectD2xx.cpp.i:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.i
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmxObjectD2xx.cpp.i
 .PHONY : src/dmxObjectD2xx.cpp.i
 
 src/dmxObjectD2xx.s: src/dmxObjectD2xx.cpp.s
@@ -241,6 +310,7 @@ src/dmxObjectD2xx.s: src/dmxObjectD2xx.cpp.s
 # target to generate assembly for a file
 src/dmxObjectD2xx.cpp.s:
 	$(MAKE) -f CMakeFiles/dmx485.dir/build.make CMakeFiles/dmx485.dir/src/dmxObjectD2xx.cpp.s
+	$(MAKE) -f CMakeFiles/dmx485pd.dir/build.make CMakeFiles/dmx485pd.dir/src/dmxObjectD2xx.cpp.s
 .PHONY : src/dmxObjectD2xx.cpp.s
 
 # Help Target
@@ -251,16 +321,23 @@ help:
 	@echo "... depend"
 	@echo "... package"
 	@echo "... list_install_components"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... package_source"
 	@echo "... install"
 	@echo "... install/strip"
-	@echo "... install/local"
 	@echo "... dmx485"
+	@echo "... install/local"
+	@echo "... edit_cache"
+	@echo "... dmx485pd"
+	@echo "... src/DMXObjectCore.o"
+	@echo "... src/DMXObjectCore.i"
+	@echo "... src/DMXObjectCore.s"
 	@echo "... src/dmx485.o"
 	@echo "... src/dmx485.i"
 	@echo "... src/dmx485.s"
+	@echo "... src/dmx485_pd.o"
+	@echo "... src/dmx485_pd.i"
+	@echo "... src/dmx485_pd.s"
 	@echo "... src/dmxObjectD2xx.o"
 	@echo "... src/dmxObjectD2xx.i"
 	@echo "... src/dmxObjectD2xx.s"

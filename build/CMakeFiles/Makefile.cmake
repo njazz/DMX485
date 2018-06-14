@@ -11,10 +11,13 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.6.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.6.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.6.1/CMakeSystem.cmake"
+  "../help/dmx485--help.pd"
   "../help/dmx485.maxhelp"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
+  "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
+  "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeFindCodeBlocks.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeGenericSystem.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeLanguageInformation.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/CMakeSystemSpecificInformation.cmake"
@@ -32,6 +35,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Platform/Darwin-Initialize.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Platform/Darwin.cmake"
   "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/Platform/UnixPaths.cmake"
+  "/usr/local/Cellar/cmake/3.6.1/share/cmake/Modules/ProcessorCount.cmake"
   )
 
 # The corresponding makefile is:
@@ -43,6 +47,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "../bin/dmx485.maxhelp"
+  "../bin/dmx485--help.pd"
   "dmx485.mxo/Contents/MacOS"
   "dmx485.mxo/Contents/Info.plist"
   "dmx485.mxo/Contents/Info.plist"
@@ -52,4 +57,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/dmx485.dir/DependInfo.cmake"
+  "CMakeFiles/dmx485pd.dir/DependInfo.cmake"
   )

@@ -45,6 +45,24 @@ file(INSTALL DESTINATION "/Users/njazz/Documents/github/DMX485_0.62/bin" TYPE DI
   endif()
 endif()
 
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.pd_darwin")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+file(INSTALL DESTINATION "/Users/njazz/Documents/github/DMX485_0.62/bin" TYPE MODULE FILES "/Users/njazz/Documents/github/DMX485_0.62/build/dmx485.pd_darwin")
+  if(EXISTS "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.pd_darwin" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.pd_darwin")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.pd_darwin")
+    endif()
+  endif()
+endif()
+
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()
