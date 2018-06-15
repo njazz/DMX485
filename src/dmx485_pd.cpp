@@ -265,6 +265,9 @@ void dmx485_setup(void)
     dmx485_class = c;
     dmxObject = new DMXObjectCore();//&dm2xx::instance();
 
+    dmxObject->log.addMsgAction([](std::string s){post("%s",s.c_str());});
+    dmxObject->log.addErrorAction([](std::string s){error("%s",s.c_str());});
+
     //dmx1->mClass = (t_object*)dmx485_class;
     // printf("dmx485 msg");
 
