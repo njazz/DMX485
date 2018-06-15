@@ -1,3 +1,0 @@
-/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.mxo/Contents/Info.plist
-/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.mxo/Contents/MacOS/dmx485
-/Users/njazz/Documents/github/DMX485_0.62/bin/dmx485.pd_darwin
