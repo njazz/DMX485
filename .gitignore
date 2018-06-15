@@ -6,3 +6,7 @@ FTDI/libftd2xx.a
 dmx485.xcodeproj/project.xcworkspace/xcuserdata/njazz.xcuserdatad/UserInterfaceState.xcuserstate
 
 build/
+
+bin/dmx485.pd_darwin
+
+bin/dmx485.mxo/Contents/MacOS/dmx485
