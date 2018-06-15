@@ -304,8 +304,8 @@ size_t DMXObjectCore::deviceCount()
 
 std::string DMXObjectCore::deviceNameAt(size_t idx)
 {
-    char* buffer;
-    FT_ListDevices((PVOID)index, buffer, FT_LIST_BY_INDEX); //|FT_OPEN_BY_DESCRIPTION\
+    char* buffer = (char*)malloc(64);
+    FT_ListDevices((PVOID)idx, buffer, FT_LIST_BY_INDEX); //|FT_OPEN_BY_DESCRIPTION\
 
     std::string ret = std::string(buffer);
     log.msg("device name: " + ret);
