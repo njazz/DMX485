@@ -1,4 +1,3 @@
-
 #include "log.h"
 
 struct DMXImplementation;

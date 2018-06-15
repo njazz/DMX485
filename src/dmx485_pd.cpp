@@ -1,5 +1,5 @@
 //
-//  dmx485 Max object
+//  dmx485 Pd object
 //
 //  Created by Alex Nadzharov on 29/05/14.
 //  Copyright (c) 2014 Alex Nadzharov. All rights reserved.
@@ -23,8 +23,6 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
-
-//#include "dmxObject_pd.h"
 
 #include "m_pd.h"
 
@@ -138,15 +136,12 @@ void dmx_refresh(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 
 void dmx_print(t_dmx485* x, t_symbol* s, long argc, t_atom* argv)
 {
-
     int n = dmxObject->deviceCount();
 
     outlet_anything(x->out, gensym("clear"), 0, NULL);
 
     for (int i = 0; i < n; i++)
-
     {
-        //char* Buffer = (char*)malloc(64);
         auto str = dmxObject->deviceNameAt(i);
 
         post("dev idx: %i", i);
