@@ -93,7 +93,7 @@ std::function<void(void)> DMXImplementation::getThread(){ return [&]() {
         if (threadOn)
             timerAction();
 
-        usleep(10000);
+        usleep(25000);
         //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
     }
 }; };

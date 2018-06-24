@@ -20,7 +20,9 @@ set (CMAKE_OSX_ARCHITECTURES "x86_64" "i386")
 add_library(dmx485 MODULE ${SOURCES})
 set_property(TARGET dmx485 PROPERTY CXX_STANDARD 11)
 
-target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx.1.2.2.dylib)
+#target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx.1.2.2.dylib)
+target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx64.a)
+target_link_libraries(dmx485 ${PROJECT_SOURCE_DIR}/FTDI/libftd2xx32.a)
 
 target_link_libraries(dmx485 ${LIBS} "-undefined dynamic_lookup")
 set_target_properties(dmx485 PROPERTIES PREFIX "")
