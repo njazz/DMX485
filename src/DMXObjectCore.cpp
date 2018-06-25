@@ -23,7 +23,7 @@ struct DMXImplementation {
     PCHAR ftDeviceDescription = 0;
 
     //thread:
-//    pthread_t dThread;
+    //    pthread_t dThread;
     bool threadOn;
     int threadAction;
 
@@ -31,7 +31,7 @@ struct DMXImplementation {
     void timerAction();
     std::function<void(void)> getThread();
 
-    std::thread* _thread = 0;//(getThread());
+    std::thread* _thread = 0; //(getThread());
 
     unsigned char* _data = 0;
     DMXObjectCore* _object = 0;
@@ -40,14 +40,14 @@ struct DMXImplementation {
     DMXImplementation()
     {
         //pthread_create(&dThread, NULL, getThread(), NULL);
-       // _thread = std::thread(getThread());
+        // _thread = std::thread(getThread());
         _thread = new std::thread(getThread());
     }
 
     ~DMXImplementation()
     {
-//        pthread_join(dThread, NULL);
-//        pthread_exit(NULL);
+        //        pthread_join(dThread, NULL);
+        //        pthread_exit(NULL);
         _thread->join();
         delete _thread;
     }
@@ -58,45 +58,48 @@ struct DMXImplementation {
 
 //void* DMXImplementation::thread(void*)
 
-std::function<void(void)> DMXImplementation::getThread(){ return [&]() {
-    while (true) {
+std::function<void(void)> DMXImplementation::getThread()
+{
+    return [&]() {
+        while (true) {
 
-        if (threadAction == 1) {
-            if (_object->extraDebug)
-                _object->log.msg(">connect\n");
-            threadAction = 0;
-            _object->connect();
+            if (threadAction == 1) {
+                if (_object->extraDebug)
+                    _object->log.msg(">connect\n");
+                threadAction = 0;
+                _object->connect();
+            }
+
+            if (threadAction == 2) {
+                if (_object->extraDebug)
+                    _object->log.msg(">disconnect\n");
+                threadAction = 0;
+                _object->disconnect();
+            }
+
+            if (threadAction == 3) {
+                //post(">restart");
+                threadOn = 0;
+
+                _object->disconnect();
+                threadAction = 0;
+
+                //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                usleep(10000);
+
+                threadAction = 1;
+                //});
+            }
+
+            if (threadOn)
+                timerAction();
+
+            usleep(25000);
+            //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
         }
-
-        if (threadAction == 2) {
-            if (_object->extraDebug)
-                _object->log.msg(">disconnect\n");
-            threadAction = 0;
-            _object->disconnect();
-        }
-
-        if (threadAction == 3) {
-            //post(">restart");
-            threadOn = 0;
-
-            _object->disconnect();
-            threadAction = 0;
-
-            //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-            usleep(10000);
-
-            threadAction = 1;
-            //});
-        }
-
-        if (threadOn)
-            timerAction();
-
-        usleep(25000);
-        //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
-    }
-}; };
+    };
+};
 
 void DMXImplementation::timerAction()
 {
@@ -118,17 +121,24 @@ void DMXImplementation::timerAction()
     if (dmxPointer) {
 
         FT_SetBreakOff(dmxPointer);
-        qftdiPortStatus = FT_Write((dmxPointer), &start, s1, &bytesWrittenOrRead);
 
-        int fuse = 10;
-        while (s2 && fuse) {
-            qftdiPortStatus = FT_Write((dmxPointer), _data + (s2_init - s2), s2, &bytesWrittenOrRead);
-            s2 -= bytesWrittenOrRead;
-            fuse--;
+        if (threadOn)
+            usleep(16);
+
+        if (threadOn) {
+            //_impl->ftdiPortStatus = FT_SetDataCharacteristics(tdmxPointer, FT_BITS_8, FT_STOP_BITS_2, FT_PARITY_NONE);
+            qftdiPortStatus = FT_Write((dmxPointer), &start, s1, &bytesWrittenOrRead);
+
+            int fuse = 100;
+            while (s2 && fuse) {
+                qftdiPortStatus = FT_Write((dmxPointer), _data + (s2_init - s2), s2, &bytesWrittenOrRead);
+                s2 -= bytesWrittenOrRead;
+                fuse--;
+            }
+
+            FT_SetBreakOn(dmxPointer);
+            qftdiPortStatus = FT_Purge(dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
         }
-
-        FT_SetBreakOn(dmxPointer);
-        qftdiPortStatus = FT_Purge(dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
     }
 
     if (qftdiPortStatus != FT_OK) {
@@ -199,7 +209,7 @@ void DMXObjectCore::connect()
                 return;
             }
 
-            _impl->ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x00, 0);
+            _impl->ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x66, 0x20); //0x00 0x00
             if (_impl->ftdiPortStatus != FT_OK) {
                 log.errorMsg("dmx485: electronics error: Can't set bit bang mode");
                 _impl->dmxPointer = 0;
