@@ -5,6 +5,7 @@
 
 #include <string>
 
+#include <chrono>
 #include <functional>
 #include <thread>
 
@@ -24,13 +25,13 @@ struct DMXImplementation {
 
     //thread:
     //    pthread_t dThread;
-    bool threadOn;
-    int threadAction;
+    bool threadOn = false;
+    int threadAction = 0;
 
     //static void* thread(void*);
     void timerAction();
-    std::function<void(void)> getThread();
 
+    std::function<void(void)> getThread();
     std::thread* _thread = 0; //(getThread());
 
     unsigned char* _data = 0;
@@ -86,7 +87,8 @@ std::function<void(void)> DMXImplementation::getThread()
 
                 //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-                usleep(10000);
+                //usleep(10000);
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
                 threadAction = 1;
                 //});
@@ -95,7 +97,8 @@ std::function<void(void)> DMXImplementation::getThread()
             if (threadOn)
                 timerAction();
 
-            usleep(25000);
+            //usleep(25000);
+            std::this_thread::sleep_for(std::chrono::milliseconds(25));
             //[NSThread sleepForTimeInterval:1 / 50 * NSEC_PER_SEC];
         }
     };
@@ -105,9 +108,7 @@ void DMXImplementation::timerAction()
 {
 
     DWORD bytesWrittenOrRead;
-    unsigned char start;
-
-    start = 0;
+    unsigned char start = 0;
 
     DWORD s1 = 1;
 
@@ -120,12 +121,29 @@ void DMXImplementation::timerAction()
 
     if (dmxPointer) {
 
-        FT_SetBreakOff(dmxPointer);
+        //        FT_SetBreakOn(dmxPointer);
+        //        if (threadOn)
+        //            usleep(10);
 
-        if (threadOn)
-            usleep(16);
+        //        FT_SetBreakOff(dmxPointer);
+        //        if (threadOn)
+        //            usleep(8);
+
+        //        if (threadOn)
+        //            usleep(16);
 
         if (threadOn) {
+
+//            FT_SetBreakOn(dmxPointer);
+            //            if (threadOn)
+            //usleep(10);
+//            std::this_thread::sleep_for(std::chrono::microseconds(22));
+
+            FT_SetBreakOff(dmxPointer);
+            //            if (threadOn)
+
+            std::this_thread::sleep_for(std::chrono::microseconds(2));
+
             //_impl->ftdiPortStatus = FT_SetDataCharacteristics(tdmxPointer, FT_BITS_8, FT_STOP_BITS_2, FT_PARITY_NONE);
             qftdiPortStatus = FT_Write((dmxPointer), &start, s1, &bytesWrittenOrRead);
 
@@ -136,8 +154,11 @@ void DMXImplementation::timerAction()
                 fuse--;
             }
 
-            FT_SetBreakOn(dmxPointer);
+            // FT_SetBreakOn(dmxPointer);
             qftdiPortStatus = FT_Purge(dmxPointer, FT_PURGE_RX | FT_PURGE_TX);
+
+            FT_SetBreakOn(dmxPointer);
+            //std::this_thread::sleep_for(std::chrono::milliseconds(18));
         }
     }
 
@@ -209,7 +230,13 @@ void DMXObjectCore::connect()
                 return;
             }
 
-            _impl->ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x66, 0x20); //0x00 0x00
+            _impl->ftdiPortStatus = FT_ResetDevice(tdmxPointer);
+            if (_impl->ftdiPortStatus != FT_OK) {
+                log.errorMsg("dmx485: error: can't reset device");
+                _impl->dmxPointer = 0;
+                return;
+            }
+            _impl->ftdiPortStatus = FT_SetBitMode(tdmxPointer, 0x00, 0x18); //0x00 0x00
             if (_impl->ftdiPortStatus != FT_OK) {
                 log.errorMsg("dmx485: electronics error: Can't set bit bang mode");
                 _impl->dmxPointer = 0;
@@ -217,7 +244,7 @@ void DMXObjectCore::connect()
             }
 
             // reset etc.
-            _impl->ftdiPortStatus = FT_ResetDevice(tdmxPointer);
+
             _impl->ftdiPortStatus = FT_Purge(tdmxPointer, FT_PURGE_RX | FT_PURGE_TX);
             _impl->ftdiPortStatus = FT_SetBaudRate(tdmxPointer, 250000);
 
@@ -248,7 +275,9 @@ void DMXObjectCore::connect()
 
             _impl->dmxPointer = tdmxPointer;
 
-            usleep(10000);
+//            usleep(10000);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
 
             if (extraDebug)
                 log.msg("setting timer");
